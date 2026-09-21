@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>샌드위치 위클리 · 공유본</title>
+<style>
+:root{--canvas:#F7F2E6;--surface:#FFFDF7;--surface-2:#F1EADA;--ink:#1C1F1A;--ink-2:#414538;
+ --muted:#6B7065;--line:#E4DCC8;--accent:#1F3A21;--accent-soft:#E7EDE2;--on-accent:#FFFDF7;
+ --warn:#8A6A16;--warn-soft:#F6EED9;--plan:#1D5F6B;--plan-soft:#DFEDEF;--done:#2F6B3A;--done-soft:#E2EFE3;
+ --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+ --mono:ui-monospace,"SF Mono",Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--canvas:#14170F;--surface:#1D2117;--surface-2:#252A1D;
+ --ink:#ECE6D6;--ink-2:#C7C2B2;--muted:#94998B;--line:#2F3527;--accent:#8FC095;--accent-soft:#232C21;--on-accent:#10160E;
+ --warn:#D9B05C;--warn-soft:#2C2616;--plan:#79BCC6;--plan-soft:#152729;--done:#8CC694;--done-soft:#17251A}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 80px}
+header.top{padding:28px 0 16px;border-bottom:1px solid var(--line);margin-bottom:8px}
+header.top h1{margin:0;font-size:25px;font-weight:600;letter-spacing:-.02em}
+header.top .sub{color:var(--muted);font-size:13px;margin-top:4px}
+.banner{background:var(--accent-soft);color:var(--accent);border-radius:10px;padding:11px 14px;font-size:13px;margin:16px 0 22px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 22px}
+.tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:980px;
+ padding:7px 15px;font:inherit;font-size:13.5px;cursor:pointer;font-family:var(--mono)}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+h2{font-size:20px;margin:0;letter-spacing:-.02em}
+h3.sec{font-size:15px;font-weight:600;margin:28px 0 10px}
+h3.sec .meta{font-weight:400}
+.wkhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px}
+.card ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:13.5px}
+.grid{display:grid;gap:13px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.item,.idea{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.item h3{font-size:14.5px;font-weight:600;margin:6px 0 6px;line-height:1.45}
+.item h3 a{color:var(--ink);text-decoration:none}
+.item h3 a:hover{text-decoration:underline}
+.item p{margin:0 0 7px;font-size:13px;color:var(--ink-2)}
+.idea h4{margin:5px 0 0;font-size:13.5px;font-weight:600;line-height:1.45}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11.5px;background:var(--surface-2);color:var(--ink-2)}
+.chip.g{background:var(--accent-soft);color:var(--accent)}
+.chip.w{background:var(--warn-soft);color:var(--warn)}
+.chip.p{background:var(--plan-soft);color:var(--plan)}
+.chip.d{background:var(--done-soft);color:var(--done)}
+.chip.line{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.meta{font-size:11.5px;color:var(--muted)}
+.dot{opacity:.5}
+.dim{color:var(--muted)}
+.sm{font-size:12px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.pre{white-space:pre-wrap;font-size:13.5px;color:var(--ink-2);margin-top:8px}
+.kws{display:flex;flex-direction:column;gap:7px}
+details.kw{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 13px}
+details.kw summary{cursor:pointer;font-size:13.5px;list-style:none}
+details.kw summary::-webkit-details-marker{display:none}
+details.kw summary::before{content:"▸ "}
+details.kw[open] summary::before{content:"▾ "}
+details.kw i{font-style:normal;font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.ev{padding:7px 0 0;font-size:13px;display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.brow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.brow:last-child{border-bottom:0}
+.bname{font-weight:500}
+a{color:var(--accent)}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+@media (max-width:720px){.wrap{padding:0 16px 80px}.grid{grid-template-columns:1fr}header.top h1{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1>샌드위치 위클리</h1>
+  <div class="sub">타운샌드위치 주간 자료 · 대표님 공유본</div>
+</header>
+
+<div class="banner">읽기 전용 사본입니다. 여기서 고친 내용은 저장되지 않습니다.
+자료는 공개 RSS에서 모은 것이고, 기사 제목·짧은 요약·원문 링크만 담았습니다.
+개인 작업 메모는 빠져 있습니다. <b>만든 시각 2026.09.21 17:18</b></div>
+
+<div class="tabs"><button data-week="2026-W39" aria-pressed="false">2026-W39</button><button data-week="2026-W38" aria-pressed="false">2026-W38</button><button data-week="2026-W37" aria-pressed="false">2026-W37</button></div>
+<section class="week" data-week="2026-W39" hidden>
+  <div class="wkhead"><h2>2026-W39</h2><span class="meta">2026.09.21 – 2026.09.27</span>
+    <span class="meta mono">수집 2026-09-21 17:12</span></div>
+
+  <h3 class="sec">자료에서 확인한 사실</h3>
+  <div class="card"><ul><li>수집 3건 — 국내 2 · 해외 1</li><li>분류 — 메뉴·재료 2 · 브랜드·매장 1 · 마케팅 0</li><li>근거 2건 이상 키워드 — cu, 샌드위치, 핫브레드</li></ul>
+    <p class="dim sm">집계한 숫자만 적었습니다. 좋아요·댓글 수나 매출처럼 확보하지 못한 값은 넣지 않았습니다.</p></div>
+
+  <h3 class="sec">활용 아이디어 요약</h3>
+  <p class="dim">이 주차에 작성된 활용 아이디어 요약이 없습니다.</p>
+
+  <h3 class="sec">주목할 흐름 <span class="meta">서로 다른 출처 2곳 이상에서 반복된 것만</span></h3>
+  <div class="kws"><details class="kw"><summary><b>cu</b> <i>2건 · 출처 2</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1WTGF0TzdDcnhnSEhWT3VTQ3RhSkJOS1pFa1hONGlDNGw5UnBxa3JzMHlHdTc0QXl1aGgtRFpFS1ZoRUtScW51eXhqWUtHMjhIT2ppTmxsdVUzdm4xdVJNN1RhS0FCSW9WbFHSAW9BVV95cUxPdTBWck1JQ2l3T3BocHk4NnBYeUNVRmt6d2hLaXRWSVh4NkN5b2oweEpPWUh3cFJEazhOQTNPMG1taWN4UWNMTTJjRlNyQ3UyWUk5R0NrUWF6MGRKMFZuZy1tcFdRbmRsNno3TS1KaFU?oc=5" target="_blank" rel="noopener noreferrer">찬바람 부는 날씨에 따뜻한 빵...CU, &#x27;핫브레드&#x27; 샌드위치 6종 출시</a><span class="meta">머니투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sbnVkeXVQa0FhVUZ4SU1EUy1NTEJZUk52NEtpQnJzS3hod1ozWURxX3dvYlVjWjhLV05RN3EyeXdZZFhDb3dmdVBpQUVCaC16bG1ab1EyeTNXcW9GRFA5UGdhRXM0VTRQTTJBT3VUemdoMmNrbEc4eQ?oc=5" target="_blank" rel="noopener noreferrer">CU, 데워 먹는 샌드위치 6종으로 핫브레드 구성 확대</a><span class="meta">로이슈</span></div></details><details class="kw"><summary><b>샌드위치</b> <i>2건 · 출처 2</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1WTGF0TzdDcnhnSEhWT3VTQ3RhSkJOS1pFa1hONGlDNGw5UnBxa3JzMHlHdTc0QXl1aGgtRFpFS1ZoRUtScW51eXhqWUtHMjhIT2ppTmxsdVUzdm4xdVJNN1RhS0FCSW9WbFHSAW9BVV95cUxPdTBWck1JQ2l3T3BocHk4NnBYeUNVRmt6d2hLaXRWSVh4NkN5b2oweEpPWUh3cFJEazhOQTNPMG1taWN4UWNMTTJjRlNyQ3UyWUk5R0NrUWF6MGRKMFZuZy1tcFdRbmRsNno3TS1KaFU?oc=5" target="_blank" rel="noopener noreferrer">찬바람 부는 날씨에 따뜻한 빵...CU, &#x27;핫브레드&#x27; 샌드위치 6종 출시</a><span class="meta">머니투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sbnVkeXVQa0FhVUZ4SU1EUy1NTEJZUk52NEtpQnJzS3hod1ozWURxX3dvYlVjWjhLV05RN3EyeXdZZFhDb3dmdVBpQUVCaC16bG1ab1EyeTNXcW9GRFA5UGdhRXM0VTRQTTJBT3VUemdoMmNrbEc4eQ?oc=5" target="_blank" rel="noopener noreferrer">CU, 데워 먹는 샌드위치 6종으로 핫브레드 구성 확대</a><span class="meta">로이슈</span></div></details><details class="kw"><summary><b>핫브레드</b> <i>2건 · 출처 2</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1WTGF0TzdDcnhnSEhWT3VTQ3RhSkJOS1pFa1hONGlDNGw5UnBxa3JzMHlHdTc0QXl1aGgtRFpFS1ZoRUtScW51eXhqWUtHMjhIT2ppTmxsdVUzdm4xdVJNN1RhS0FCSW9WbFHSAW9BVV95cUxPdTBWck1JQ2l3T3BocHk4NnBYeUNVRmt6d2hLaXRWSVh4NkN5b2oweEpPWUh3cFJEazhOQTNPMG1taWN4UWNMTTJjRlNyQ3UyWUk5R0NrUWF6MGRKMFZuZy1tcFdRbmRsNno3TS1KaFU?oc=5" target="_blank" rel="noopener noreferrer">찬바람 부는 날씨에 따뜻한 빵...CU, &#x27;핫브레드&#x27; 샌드위치 6종 출시</a><span class="meta">머니투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sbnVkeXVQa0FhVUZ4SU1EUy1NTEJZUk52NEtpQnJzS3hod1ozWURxX3dvYlVjWjhLV05RN3EyeXdZZFhDb3dmdVBpQUVCaC16bG1ab1EyeTNXcW9GRFA5UGdhRXM0VTRQTTJBT3VUemdoMmNrbEc4eQ?oc=5" target="_blank" rel="noopener noreferrer">CU, 데워 먹는 샌드위치 6종으로 핫브레드 구성 확대</a><span class="meta">로이슈</span></div></details></div>
+
+  <h3 class="sec">실행 아이디어 <span class="meta">0건</span></h3>
+  <div class="grid"><p class="dim">이 주차에 공유된 아이디어가 없습니다.</p></div>
+
+  <h3 class="sec">관심 브랜드 검토 현황 <span class="meta">0 / 0</span></h3>
+  <div class="card"><p class="dim">등록된 관심 브랜드가 없습니다.</p></div>
+
+  
+
+  <h3 class="sec">트렌드 자료 <span class="meta">3건</span></h3>
+  <div class="grid"><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE95QXNvRDU5NkVxQlA1UG1MSG8zbHptaGZVNDBCV3J0cnZqUXlnSzVtZXN3dmM3d1F6MGY0YllTVy00bTZKSVloN3Vxbl9FU3ExdW1mcGRJQjBSLWE5cmotU3huRlNKLWF4T3l2YmlKVG10Vm1a?oc=5" target="_blank" rel="noopener noreferrer">Every location of this Toronto sandwich chain has now closed</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">blogTO <span class="dot">·</span> <span class="mono">게시 2026.09.21</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1WTGF0TzdDcnhnSEhWT3VTQ3RhSkJOS1pFa1hONGlDNGw5UnBxa3JzMHlHdTc0QXl1aGgtRFpFS1ZoRUtScW51eXhqWUtHMjhIT2ppTmxsdVUzdm4xdVJNN1RhS0FCSW9WbFHSAW9BVV95cUxPdTBWck1JQ2l3T3BocHk4NnBYeUNVRmt6d2hLaXRWSVh4NkN5b2oweEpPWUh3cFJEazhOQTNPMG1taWN4UWNMTTJjRlNyQ3UyWUk5R0NrUWF6MGRKMFZuZy1tcFdRbmRsNno3TS1KaFU?oc=5" target="_blank" rel="noopener noreferrer">찬바람 부는 날씨에 따뜻한 빵...CU, &#x27;핫브레드&#x27; 샌드위치 6종 출시</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">머니투데이 <span class="dot">·</span> <span class="mono">게시 2026.09.21</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9sbnVkeXVQa0FhVUZ4SU1EUy1NTEJZUk52NEtpQnJzS3hod1ozWURxX3dvYlVjWjhLV05RN3EyeXdZZFhDb3dmdVBpQUVCaC16bG1ab1EyeTNXcW9GRFA5UGdhRXM0VTRQTTJBT3VUemdoMmNrbEc4eQ?oc=5" target="_blank" rel="noopener noreferrer">CU, 데워 먹는 샌드위치 6종으로 핫브레드 구성 확대</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">로이슈 <span class="dot">·</span> <span class="mono">게시 2026.09.21</span></div>
+  <div class="dim sm">같은 소식 5건 더</div>
+</article></div>
+</section><section class="week" data-week="2026-W38" hidden>
+  <div class="wkhead"><h2>2026-W38</h2><span class="meta">2026.09.14 – 2026.09.20</span>
+    <span class="meta mono">수집 2026-09-21 17:12</span></div>
+
+  <h3 class="sec">자료에서 확인한 사실</h3>
+  <div class="card"><ul><li>수집 42건 — 국내 17 · 해외 25</li><li>분류 — 메뉴·재료 37 · 브랜드·매장 4 · 마케팅 1</li><li>근거 2건 이상 키워드 — sandwich, shop, cafe, bakery, 가을, 메뉴</li></ul>
+    <p class="dim sm">집계한 숫자만 적었습니다. 좋아요·댓글 수나 매출처럼 확보하지 못한 값은 넣지 않았습니다.</p></div>
+
+  <h3 class="sec">활용 아이디어 요약</h3>
+  <p class="dim">이 주차에 작성된 활용 아이디어 요약이 없습니다.</p>
+
+  <h3 class="sec">주목할 흐름 <span class="meta">서로 다른 출처 2곳 이상에서 반복된 것만</span></h3>
+  <div class="kws"><details class="kw"><summary><b>sandwich</b> <i>12건 · 출처 6</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxQb1I2RWJBMDM1RENXaW5qQnNUSHN3a2FfVjhKOEJfZ3lrdy1VaENNaEY3bVEzTlp3Q1gxRFBjSU9hcVhmWGJSbkFqLVY4UEZOZUtpaW52VExrMVhUZ25vVTNtMW5lOE1xd09meXV1WWd6Tm03YmNRMUNwSWFxZjRRVWNzbTViTnRlOHVzaHhNOGlxUmtrZm1PQjRYVklxLXRhVTEyNTlBZDVYVEtzM3hLbEx5YXhKWUJOUTRzaTZzd0pkVURPeVJoREh5MXpfT0U?oc=5" target="_blank" rel="noopener noreferrer">‘Beer is king’ at this pub and sandwich shop anchoring a Rock Hill food hall</a><span class="meta">Post and Courier</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNbFhwQ0h2dGxxMEo3WHBiY3BPX21VZzVRNUxOYjZYbHR3MzM3NEFkenVEaC1MR3FVLUtEbTlwT0N3di1YSWxod2pCc2w4N3ZYVko3emtKc3lIRDlSV09nN3ZOMDd1X0VVbFVFeS1QYUQxZ2lNMjlDaXphY1lWN0owbm5GRk8wM2JFckJlNDhsNkU?oc=5" target="_blank" rel="noopener noreferrer">Beloved Pendleton sandwich shop opens sister cafe</a><span class="meta">East Oregonian</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxQUUttcmlfZ2pWbHBZWWxYczFvVkR0Y2FqMmE2d01WT2VUdUtYd0EtSkJHTVptTTNOQVN6NVl5TkQybDFaTEM0bGNoY0E5S2o1VDUxMEdNR2lPRzJrMEtSRHNKald4Y2ZacW05M2FrRGJ1emVFMUhteU1zWlltYVdqUVRCUnFLRi1wVUxZVFdfM1ZvYWlURlZaSW5ZWHRObWRqN1NBeEZiazFDMlZfVDVTTW9URlY4QWN5UUpXdmpOSDIxaXFMVS1sUFk1eUc5MW5ObGxoM3JNUzM2d0ZWdk9ERzlFUdIB9wFBVV95cUxPUmhwcm1nNUwwMDV5d3hTdkF4NUpQMDRMQnpObGxKMUhrbTM4cllYeGYtaTZaRUt3N0Vsdkl5d2hNRFhYU2daOHp4aDk3TGN2UW9XcXhWVXFjdGg2c2tSUzNBR0hubjFoeU9zX2RSX3VBWFAta0JIeFVHOGUwZW1UZUJxTVlqQzVDTWphanpJUGtDMmVUVkFvSzlnaXo5TFNuVGluWE1VTkEtdGUtdk5WY3RWWVh1YXlWVDZSRlM4cVRzX2FUVnhaNXlBM0ZQaFF3bzd0aTBLM0d2b29WQVRmYndrTHpZNmRPSUh0cWdQM045bzBrTktv?oc=5" target="_blank" rel="noopener noreferrer">National sandwich chain’s first Georgia location holds grand opening; free food for year offer</a><span class="meta">WSB-TV</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPQU5CZ256d01KNXdaazkxcWxZTFVCUkpUQ3JFQUFoN1RVaEFCSk9UbGRwTUNWSERXTldHOEJ5X3Bxb1AyUG9HQXJ3cFlKSGFPNnRKVEp1SDFod0FRVWxPU3ZwMmdQQ19lQTRPWm9xRVlmU3pBbWljZWV5MnZyaU9DVGpNd2czQnZIME1IVWNHMzY1aUc2ZDBqeThqVTd5clUxQ0hCUjZaM0xJb2ttTmhJdXF6NTR3dnJoTHNxQ1RBMWlTQQ?oc=5" target="_blank" rel="noopener noreferrer">Founders of Sweet Pete’s Candy take over Desert Rider Sandwich Shop Downtown</a><span class="meta">Jacksonville Daily Record</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOSFA4dlBDZWtNcXZfbE9oS0VkTm51b0hzLUlSVzh0eEJhV0s5bkREV3pyVW1jVC15WFhJRGtIdUMxZFhSemdfdzBON3dHSFZHaHZJTzBjYkdQNnFpbTdpWFJYUEhXajVXUGhXaEVzbXdfWk5LcldsWjMtSUNLOVVhMXR6UENFTUpPNzB1ZmFFM1NmQkU2?oc=5" target="_blank" rel="noopener noreferrer">Sept. 17 Quick Bites: Da Cocinita Magic Taco&#x27;s comeback, Avondale sandwich shop reopens, Midtown sandwich shop closes</a><span class="meta">Rough Draft Atlanta</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPSnFlUmh4d1hEdWE5VVlQM2l6MF9IVVhRcVd4U1l1Rmg5cXNGWDBiS3FsSTNMbkhFUkstWElkXzJuWHViQ0NhbFFJdEF2bzNxNVRuYUQ1NjVsZUdMNG5TbDNVWlBxaVJEZGEwcmEteFh3Z0dzekVFS1dDMnhZQmF3RGFtZVBLY21EaFR6TFZ4c3BCR2hSa2VKaGNR?oc=5" target="_blank" rel="noopener noreferrer">Late night fire damages dry cleaners, sandwich shop</a><span class="meta">News Channel 6 | Wichita Falls, TX</span></div></details><details class="kw"><summary><b>shop</b> <i>10건 · 출처 6</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxQb1I2RWJBMDM1RENXaW5qQnNUSHN3a2FfVjhKOEJfZ3lrdy1VaENNaEY3bVEzTlp3Q1gxRFBjSU9hcVhmWGJSbkFqLVY4UEZOZUtpaW52VExrMVhUZ25vVTNtMW5lOE1xd09meXV1WWd6Tm03YmNRMUNwSWFxZjRRVWNzbTViTnRlOHVzaHhNOGlxUmtrZm1PQjRYVklxLXRhVTEyNTlBZDVYVEtzM3hLbEx5YXhKWUJOUTRzaTZzd0pkVURPeVJoREh5MXpfT0U?oc=5" target="_blank" rel="noopener noreferrer">‘Beer is king’ at this pub and sandwich shop anchoring a Rock Hill food hall</a><span class="meta">Post and Courier</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNbFhwQ0h2dGxxMEo3WHBiY3BPX21VZzVRNUxOYjZYbHR3MzM3NEFkenVEaC1MR3FVLUtEbTlwT0N3di1YSWxod2pCc2w4N3ZYVko3emtKc3lIRDlSV09nN3ZOMDd1X0VVbFVFeS1QYUQxZ2lNMjlDaXphY1lWN0owbm5GRk8wM2JFckJlNDhsNkU?oc=5" target="_blank" rel="noopener noreferrer">Beloved Pendleton sandwich shop opens sister cafe</a><span class="meta">East Oregonian</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPQU5CZ256d01KNXdaazkxcWxZTFVCUkpUQ3JFQUFoN1RVaEFCSk9UbGRwTUNWSERXTldHOEJ5X3Bxb1AyUG9HQXJ3cFlKSGFPNnRKVEp1SDFod0FRVWxPU3ZwMmdQQ19lQTRPWm9xRVlmU3pBbWljZWV5MnZyaU9DVGpNd2czQnZIME1IVWNHMzY1aUc2ZDBqeThqVTd5clUxQ0hCUjZaM0xJb2ttTmhJdXF6NTR3dnJoTHNxQ1RBMWlTQQ?oc=5" target="_blank" rel="noopener noreferrer">Founders of Sweet Pete’s Candy take over Desert Rider Sandwich Shop Downtown</a><span class="meta">Jacksonville Daily Record</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOSFA4dlBDZWtNcXZfbE9oS0VkTm51b0hzLUlSVzh0eEJhV0s5bkREV3pyVW1jVC15WFhJRGtIdUMxZFhSemdfdzBON3dHSFZHaHZJTzBjYkdQNnFpbTdpWFJYUEhXajVXUGhXaEVzbXdfWk5LcldsWjMtSUNLOVVhMXR6UENFTUpPNzB1ZmFFM1NmQkU2?oc=5" target="_blank" rel="noopener noreferrer">Sept. 17 Quick Bites: Da Cocinita Magic Taco&#x27;s comeback, Avondale sandwich shop reopens, Midtown sandwich shop closes</a><span class="meta">Rough Draft Atlanta</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPSnFlUmh4d1hEdWE5VVlQM2l6MF9IVVhRcVd4U1l1Rmg5cXNGWDBiS3FsSTNMbkhFUkstWElkXzJuWHViQ0NhbFFJdEF2bzNxNVRuYUQ1NjVsZUdMNG5TbDNVWlBxaVJEZGEwcmEteFh3Z0dzekVFS1dDMnhZQmF3RGFtZVBLY21EaFR6TFZ4c3BCR2hSa2VKaGNR?oc=5" target="_blank" rel="noopener noreferrer">Late night fire damages dry cleaners, sandwich shop</a><span class="meta">News Channel 6 | Wichita Falls, TX</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOd2prVzIzZ1lZbG5kN0NjVnB3V2d2a3V4X2NYQWJnV3RaOFlZOUN2eWU0bGdTcXdkWEl5WkppWDZIRGNkOWF2bnl2T2h3TmFzYUNjX2RkNG41cVl6REJNUlY0bUJiSW92bkdqNnpLeXBINWxtNmc4aVFtQmRKR1F5NzZCZVhxVGc4ZDNZZlFQUDBfQ29rcmVwYUM3V3BkQnhv0gGmAUFVX3lxTE9xclowNVFMS2M5LTZkUkp2bGVJSXZ6VHVQY2dXX0xhZkk3RFlQLU5hTFlNakotVExTTEMwZlZMUkhSMzhodE91aWFIdHhzY1hCV1UwODJJcG9nMUExcV9zQVJhT0trRkxfQWVkRVF6ZTFidnd3LWtMMnoxZ3pLRXJoUHJGbTJkQzIwUk9pZWtjOTRHRGFhc0loSUhYS0JNRDFjOExrNXc?oc=5" target="_blank" rel="noopener noreferrer">Desperate For A Job, I Applied At A Sandwich Shop. The Response I Got Was Soul-Crushing.</a><span class="meta">HuffPost</span></div></details><details class="kw"><summary><b>cafe</b> <i>7건 · 출처 6</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOV2FSOTVLOTlwZzdSbHpoNWdSQnhFN0s0YS1uSDZFa1c0cU1NX3VYNmd1b3FuNEpkaE4zWEE4XzFqT2kzbmVDaWIzUV94NDg4S3kxY3VCTWRKZDhaY0EyWjJDd1dxOGFfR2JqR2lRdl9kdmw0Q3JOT0Zhb0JpS3J2QnpRTWJNLU44MFE5ZkQ2UjBYV2VqYlFUdWZqQ3hILW5zT3dMaHpUTDl5UFFLamNn0gHDAUFVX3lxTE90T1NKS2k2TEUzWXZ4UVd0VTBCenRCMjFkWjgwd0pFSVFzUThSUjByTkFpT0JQUThIYW5JQzRyWHBkU09WRmI3SGFTRFJhZXJOdmc0XzRQOHE1UkoyOFNtN0lLMGRvdDJKM1hzV0dzUk9VQ3hTSXdNSTdvWV9aX25Td3ZDZ3JVUmhKRS0zeFhvVmFCRzdQVWhFMXVNWm1nNTE2U0pRQUF6anEtcC1nZXlDdk1qeHN5TUs2bFB5WGZjUm1qWQ?oc=5" target="_blank" rel="noopener noreferrer">Tucson bakery Cafe Francais closing, citing economic uncertainty and rising prices</a><span class="meta">kold.com</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNUGF4bTlIUFg2ZS1GUWZBNnVSb1JVaTFfWmU2ZGpKOUVlNHNfdlo3NDhxbnhQRThPQlR1SWRsd3pmZDRvVk8yZFNQUzBVcDZtR1JRekpCWWRsRmdEd2owanRZYjFSbDZwU1dnZ2lJR1lvcWZjQWc5N3N3QTNxSEhFRlpsb19iMEVna2tIZVRYVHZJTlE?oc=5" target="_blank" rel="noopener noreferrer">Mère bakery-cafe to open in Cumberland this month</a><span class="meta">Portland Press Herald - Maine Sunday Telegram</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNbFhwQ0h2dGxxMEo3WHBiY3BPX21VZzVRNUxOYjZYbHR3MzM3NEFkenVEaC1MR3FVLUtEbTlwT0N3di1YSWxod2pCc2w4N3ZYVko3emtKc3lIRDlSV09nN3ZOMDd1X0VVbFVFeS1QYUQxZ2lNMjlDaXphY1lWN0owbm5GRk8wM2JFckJlNDhsNkU?oc=5" target="_blank" rel="noopener noreferrer">Beloved Pendleton sandwich shop opens sister cafe</a><span class="meta">East Oregonian</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQUE91UmZHcUdNMjdERXB4RTh3ZllaeW1WZFVtNWNpSE01X1NtMWZxMHE2bmdXTGpaQ3dmXzZYU2R6cTJEYlUySEhJNWg5X0tZQU9lck9aaHBmeDRiWGgxOGNCckhCRWdNaUVsLWtSZTM4REJqckF1WUVJT0JoVTBpWUlxVDdnaEowcHVTV1RLOFRKbjJvS21wak5TMVJ3dnlQ?oc=5" target="_blank" rel="noopener noreferrer">Paris Baguette plans new Connecticut bakery cafe in Enfield</a><span class="meta">New Haven Register</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQdWM5R2FPODBYZk00UU9COUt5NnlJVTl0bHJIeG9RajhQUnQ0RFZOZUYwTVdOMEZ3UlVtVW9mWTJrNHZwNDktMUEwa1JfY05vRmJINWUxSUhQUTBFRkN4dkVJaVphVG8wU1pjX3lCVWo4TUFpYU1WSWlYWDF3RGZkbGpvTFlyTDZMbE14cTRLLXZmVGlzeXJxXzI0bGVoa05Lc0VQRlk0X196S204MldiSEdhWTF0TGtyUUpFaTBOZ24?oc=5" target="_blank" rel="noopener noreferrer">Today! 85°C Bakery Cafe Opens First Colorado Location with Grand Opening Weekend Celebration - 100th Location in the U.S.!</a><span class="meta">Mile High on the Cheap</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxNdlNmSkkyVVFHUjdQR0JzTXh3WFVFY1FacjlfMjVvcF9zRkZxMDlKSUJmWGxkWmlRSDB2TXFhVVdFVGVDM2J6SXdfLTVKNHNuYmlQcmJsaGJrcl9KZ0YtX3dyZnAwYzdDTFBuTUF3eG1uT0lMdWN2eW9iUGs5R0JXZHkzNTBIc2wxTkVJR0JITXg3a1E2Vk1KSnNRSWRkNFRHTG1feWtsZkNzWFd0bS1MVTNMZnc3RjNsOU5FOENWOE80OXNZRWU3d2pEVElpR2dKQWo1a2U2VGR3c1R4TFFjLW02aTZuYzZ2d0dWRHV5M3RBRjZDbGJyYmMzSzVadw?oc=5" target="_blank" rel="noopener noreferrer">Colette Bakery Cafe family plans fourth cafe on Mass. Ave. in Arlington</a><span class="meta">Wicked Local</span></div></details><details class="kw"><summary><b>bakery</b> <i>6건 · 출처 6</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOV2FSOTVLOTlwZzdSbHpoNWdSQnhFN0s0YS1uSDZFa1c0cU1NX3VYNmd1b3FuNEpkaE4zWEE4XzFqT2kzbmVDaWIzUV94NDg4S3kxY3VCTWRKZDhaY0EyWjJDd1dxOGFfR2JqR2lRdl9kdmw0Q3JOT0Zhb0JpS3J2QnpRTWJNLU44MFE5ZkQ2UjBYV2VqYlFUdWZqQ3hILW5zT3dMaHpUTDl5UFFLamNn0gHDAUFVX3lxTE90T1NKS2k2TEUzWXZ4UVd0VTBCenRCMjFkWjgwd0pFSVFzUThSUjByTkFpT0JQUThIYW5JQzRyWHBkU09WRmI3SGFTRFJhZXJOdmc0XzRQOHE1UkoyOFNtN0lLMGRvdDJKM1hzV0dzUk9VQ3hTSXdNSTdvWV9aX25Td3ZDZ3JVUmhKRS0zeFhvVmFCRzdQVWhFMXVNWm1nNTE2U0pRQUF6anEtcC1nZXlDdk1qeHN5TUs2bFB5WGZjUm1qWQ?oc=5" target="_blank" rel="noopener noreferrer">Tucson bakery Cafe Francais closing, citing economic uncertainty and rising prices</a><span class="meta">kold.com</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNUGF4bTlIUFg2ZS1GUWZBNnVSb1JVaTFfWmU2ZGpKOUVlNHNfdlo3NDhxbnhQRThPQlR1SWRsd3pmZDRvVk8yZFNQUzBVcDZtR1JRekpCWWRsRmdEd2owanRZYjFSbDZwU1dnZ2lJR1lvcWZjQWc5N3N3QTNxSEhFRlpsb19iMEVna2tIZVRYVHZJTlE?oc=5" target="_blank" rel="noopener noreferrer">Mère bakery-cafe to open in Cumberland this month</a><span class="meta">Portland Press Herald - Maine Sunday Telegram</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQUE91UmZHcUdNMjdERXB4RTh3ZllaeW1WZFVtNWNpSE01X1NtMWZxMHE2bmdXTGpaQ3dmXzZYU2R6cTJEYlUySEhJNWg5X0tZQU9lck9aaHBmeDRiWGgxOGNCckhCRWdNaUVsLWtSZTM4REJqckF1WUVJT0JoVTBpWUlxVDdnaEowcHVTV1RLOFRKbjJvS21wak5TMVJ3dnlQ?oc=5" target="_blank" rel="noopener noreferrer">Paris Baguette plans new Connecticut bakery cafe in Enfield</a><span class="meta">New Haven Register</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQdWM5R2FPODBYZk00UU9COUt5NnlJVTl0bHJIeG9RajhQUnQ0RFZOZUYwTVdOMEZ3UlVtVW9mWTJrNHZwNDktMUEwa1JfY05vRmJINWUxSUhQUTBFRkN4dkVJaVphVG8wU1pjX3lCVWo4TUFpYU1WSWlYWDF3RGZkbGpvTFlyTDZMbE14cTRLLXZmVGlzeXJxXzI0bGVoa05Lc0VQRlk0X196S204MldiSEdhWTF0TGtyUUpFaTBOZ24?oc=5" target="_blank" rel="noopener noreferrer">Today! 85°C Bakery Cafe Opens First Colorado Location with Grand Opening Weekend Celebration - 100th Location in the U.S.!</a><span class="meta">Mile High on the Cheap</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxNdlNmSkkyVVFHUjdQR0JzTXh3WFVFY1FacjlfMjVvcF9zRkZxMDlKSUJmWGxkWmlRSDB2TXFhVVdFVGVDM2J6SXdfLTVKNHNuYmlQcmJsaGJrcl9KZ0YtX3dyZnAwYzdDTFBuTUF3eG1uT0lMdWN2eW9iUGs5R0JXZHkzNTBIc2wxTkVJR0JITXg3a1E2Vk1KSnNRSWRkNFRHTG1feWtsZkNzWFd0bS1MVTNMZnc3RjNsOU5FOENWOE80OXNZRWU3d2pEVElpR2dKQWo1a2U2VGR3c1R4TFFjLW02aTZuYzZ2d0dWRHV5M3RBRjZDbGJyYmMzSzVadw?oc=5" target="_blank" rel="noopener noreferrer">Colette Bakery Cafe family plans fourth cafe on Mass. Ave. in Arlington</a><span class="meta">Wicked Local</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOSzY5Y3cwb2RsYmlCM1pFZXZQY2hicUFRRlJNXzRLRVRkTHhGd0NpcVM1dGNsRVdyQmU2VERKdWRWVWpGTHlOeF84eGw2T2dwNU5mWmg5RWlJc0h4dk4xWXNzSlVyWWR5Vkl5T1dVZktwdnZScmZsa2pVaEFPUy1MZXdkU0UtQTdDbk81Ylp1Q0tLdWdWcmdkQXBOMFIyME9n?oc=5" target="_blank" rel="noopener noreferrer">Edd’s &amp; Flo’s Artisan Bakery Cafe Sets Sights on Fishtown</a><span class="meta">WhatNow</span></div></details><details class="kw"><summary><b>가을</b> <i>4건 · 출처 4</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQUDJsT3doTl9WYTllTHdFbHRSMDJ1TThWaURVTnQzMGNRRU84VHFhUEVLVmlsNXp0VVJEVk1EeHh5NzJfX29TX0ZQQmg5aURsWkJ4cU14YUl4WkJFT09SUnJLYlY2eHZHUEsyZmRRS0dvZjF2dm9xSFc1dGRTOWg4QWVya0NKSVZlRGxxQ213?oc=5" target="_blank" rel="noopener noreferrer">커피베이·커피베이 익스프레스, 공주밤·흑임자 가을 메뉴 선봬 : 네이버 블로그</a><span class="meta">Naver Blog</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5DckxmVDBjZ1FXWDExQ0M4MTJJSnRYZmh6VG5IM2lKcVlVUVN3ZTREall0bUFIcjNhS2s2R0otR1ZTcVNzbk83NTIwb0ZQY1VlZlVBbzNvYVpFdFBLR0U0WE12QUVubHpMMnAtanFLOEtpN1ZF?oc=5" target="_blank" rel="noopener noreferrer">우지커피, 흑임자와 에스프레소 조화롭게 담아낸 가을 신제품 출시</a><span class="meta">대한경제</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE5NcWJ3TEFaUWF5VVVjbEtzQ2pZaTdjNExSY1ZWbDB4M0ZWSnhEc2NFdW9KRnRQQW5JUDBfV21sSTZRRXNra2hFVVJlZGx1UkszQ2FFcVJlQW1nRHBwRkdOblBDbXprRGljRDhLMVZCUkZUZw?oc=5" target="_blank" rel="noopener noreferrer">신세계푸드, 가을 무화과 케이크 3종 출시…제철 과일 디저트 확대</a><span class="meta">인더스트리뉴스</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE1OWXp1SXpTc1ZHeVY1bmNBUDQtejFXeG56VlZHaXlVNVZPaGZuU2tuZ211Y3FRQWxvbHdlQXNvVldKR3VuZmRnWDNCaXltd00?oc=5" target="_blank" rel="noopener noreferrer">커피업계 ‘밤’에 빠졌다…컴포즈·스타벅스·이디야, 가을 메뉴 전쟁</a><span class="meta">v.daum.net</span></div></details><details class="kw"><summary><b>메뉴</b> <i>4건 · 출처 4</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5oQ0VlWW8yQlk5ckp5cENaN1RaTFp4bGNpVmNWQ1cybHhYVXdmaDZSVkRtcFZhQU9TenRqeVlBWWVDOXFydGpHb0FUcG12UnBnQ2Rrc1ZndlQxTGU1VWl6QWdJU0lhT1E3UG9SSW13?oc=5" target="_blank" rel="noopener noreferrer">여주쌀·고구마, 파스쿠찌 메뉴로 전국 공략…10월 신메뉴 출시</a><span class="meta">아시아투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFBxN09jMEZJM0JYOGNZbzlkQUZKX21nRFZtaVRTYWFHTnF5UHd4c2RRV0lDUjV4OTFkN3BfNVlHTHpQQVFqRlRYTUN5MTM2YjkzT01qbldQdUU1RWM?oc=5" target="_blank" rel="noopener noreferrer">여주시, 파스쿠찌와 여주 농산물 활용 메뉴 개발 및 홍보 협력을 위한 상생 업무 협약 체결</a><span class="meta">한국소통투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQUDJsT3doTl9WYTllTHdFbHRSMDJ1TThWaURVTnQzMGNRRU84VHFhUEVLVmlsNXp0VVJEVk1EeHh5NzJfX29TX0ZQQmg5aURsWkJ4cU14YUl4WkJFT09SUnJLYlY2eHZHUEsyZmRRS0dvZjF2dm9xSFc1dGRTOWg4QWVya0NKSVZlRGxxQ213?oc=5" target="_blank" rel="noopener noreferrer">커피베이·커피베이 익스프레스, 공주밤·흑임자 가을 메뉴 선봬 : 네이버 블로그</a><span class="meta">Naver Blog</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE1OWXp1SXpTc1ZHeVY1bmNBUDQtejFXeG56VlZHaXlVNVZPaGZuU2tuZ211Y3FRQWxvbHdlQXNvVldKR3VuZmRnWDNCaXltd00?oc=5" target="_blank" rel="noopener noreferrer">커피업계 ‘밤’에 빠졌다…컴포즈·스타벅스·이디야, 가을 메뉴 전쟁</a><span class="meta">v.daum.net</span></div></details><details class="kw"><summary><b>샌드위치</b> <i>4건 · 출처 4</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9uc25EX0p5Y0ZMMEZNWTh3THBBQjFQT0RqaEdwaWZOMVY5QXV5bHNEYXh1QnJaYWVPYWhNSnNpSkVXc2NNVklZZU13QmNzdHhhOTFWSkRHcktsM3U1SHZkOXNpVQ?oc=5" target="_blank" rel="noopener noreferrer">카페 시사회에 유자메뉴·샌드위치...폴 바셋, 성장向 잰걸음</a><span class="meta">엔트로피타임즈</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE1IQS03QWREMkxhS0ZrRlhkSnhuOHU1SFNLQnJrQ0EwRmhiUHVCekRyX0t0SzFKVXRkV1JPWngydk90a2tBdHBZNWt3?oc=5" target="_blank" rel="noopener noreferrer">[k-한식 디렉터 장윤정]이 전하는세계 요리의 유래 프랑스 바게트가 베트남 국민 샌드위치가 되기까지, &#x27;반미&#x27;에 담긴 역사의 반전</a><span class="meta">얼리어답터뉴스</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE9vdXR3NkZfSlVUMGZYaS1KcUItNDhJZUp1bDFZZE5pa3kyTnJCelNyRllaeHhxajNNNWlsckVSV0ZyQUFNcm1HRkhiNl8zbFk?oc=5" target="_blank" rel="noopener noreferrer">“부모도 자식도, 이젠 웬수 같아요”…‘샌드위치’ 돌봄 중장년, 내 삶이 없다</a><span class="meta">v.daum.net</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE8xN0JtM1JkWEtrUGNUOFlySlUxancxaEgzUk5zV1FfRmV2U2dhLWI0VGItLUc4YnBaX1hsOUVTRG9KYWVjUndyQWhaS2otbG1nOGU4cXd5RXhabHphSFdDYkx0ZkxYTjhqckszbldKUnh6dW8?oc=5" target="_blank" rel="noopener noreferrer">파리바게뜨, 건강빵·샌드위치·샐러드로 한 끼 공략…&quot;일상식 수요 겨냥&quot;</a><span class="meta">핀포인트뉴스</span></div></details><details class="kw"><summary><b>출시</b> <i>4건 · 출처 4</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5oQ0VlWW8yQlk5ckp5cENaN1RaTFp4bGNpVmNWQ1cybHhYVXdmaDZSVkRtcFZhQU9TenRqeVlBWWVDOXFydGpHb0FUcG12UnBnQ2Rrc1ZndlQxTGU1VWl6QWdJU0lhT1E3UG9SSW13?oc=5" target="_blank" rel="noopener noreferrer">여주쌀·고구마, 파스쿠찌 메뉴로 전국 공략…10월 신메뉴 출시</a><span class="meta">아시아투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5DckxmVDBjZ1FXWDExQ0M4MTJJSnRYZmh6VG5IM2lKcVlVUVN3ZTREall0bUFIcjNhS2s2R0otR1ZTcVNzbk83NTIwb0ZQY1VlZlVBbzNvYVpFdFBLR0U0WE12QUVubHpMMnAtanFLOEtpN1ZF?oc=5" target="_blank" rel="noopener noreferrer">우지커피, 흑임자와 에스프레소 조화롭게 담아낸 가을 신제품 출시</a><span class="meta">대한경제</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE5NcWJ3TEFaUWF5VVVjbEtzQ2pZaTdjNExSY1ZWbDB4M0ZWSnhEc2NFdW9KRnRQQW5JUDBfV21sSTZRRXNra2hFVVJlZGx1UkszQ2FFcVJlQW1nRHBwRkdOblBDbXprRGljRDhLMVZCUkZUZw?oc=5" target="_blank" rel="noopener noreferrer">신세계푸드, 가을 무화과 케이크 3종 출시…제철 과일 디저트 확대</a><span class="meta">인더스트리뉴스</span></div><div class="ev"><a href="http://www.foodbank.co.kr/news/articleView.html?idxno=68497" target="_blank" rel="noopener noreferrer">빽다방, 월드 바리스타 챔피언 엄보람 협업 ‘챔피언스 블랙벨벳 라떼’ 출시</a><span class="meta">식품외식경제</span></div></details><details class="kw"><summary><b>cj</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE00Q1ByTnAyZnMyTUZQdTdJblpQaXZUcUV0Rmp6SDRjd3RGRTdiSjVmWDQwT1hKT2h6azRCOXVaQWNISDlCZklwdzd6SnNiTHR4Q2xILQ?oc=5" target="_blank" rel="noopener noreferrer">투썸 떠나보낸 CJ푸드빌, 6년 만에 브런치카페로 시장 복귀</a><span class="meta">v.daum.net</span></div><div class="ev"><a href="https://www.thinkfood.co.kr/news/articleView.html?idxno=201194" target="_blank" rel="noopener noreferrer">[09/15 오늘의 새상품] 롯데웰푸드 ‘쉐푸드 광장시장식 고기완자’, 풀무원식품 ‘식감혁신 본격 떡볶이’ 2종, 샘표 ‘우리아이 순 참기름’, 파리바게뜨 ‘감자쫀떡’, CJ푸드빌 더플레이스 ‘대하 로제 파파르델레’, 맘스터치 ‘싱글피자’ 3종, KFC ‘오리지널 딥버켓’, 이디야커피 ‘우리땅 고구마 말랭이’, 컴포즈커피 ‘밤 티라미수’</a><span class="meta">식품음료신문</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1TeXlqdjZLZDgyVVpXWC1TTmRaRGF6RDNtZml2RUJfXzltM0JDMDk5YkdzNDZCa3pMZlNXNUNRRG5PZTdqQmFLSWxVd2YyN3pLMnl3VEY2ZmdBTHplZ09GbjNxYW0wMEhKZjNCam1OZE5iT1U?oc=5" target="_blank" rel="noopener noreferrer">[오늘Who] CJ푸드빌 카페 사업 재진입 초읽기, 이건일 &#x27;투썸플레이스&#x27; 경험에 &#x27;브런치&#x27; 얹는다</a><span class="meta">비즈니스포스트</span></div></details><details class="kw"><summary><b>first</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQdWM5R2FPODBYZk00UU9COUt5NnlJVTl0bHJIeG9RajhQUnQ0RFZOZUYwTVdOMEZ3UlVtVW9mWTJrNHZwNDktMUEwa1JfY05vRmJINWUxSUhQUTBFRkN4dkVJaVphVG8wU1pjX3lCVWo4TUFpYU1WSWlYWDF3RGZkbGpvTFlyTDZMbE14cTRLLXZmVGlzeXJxXzI0bGVoa05Lc0VQRlk0X196S204MldiSEdhWTF0TGtyUUpFaTBOZ24?oc=5" target="_blank" rel="noopener noreferrer">Today! 85°C Bakery Cafe Opens First Colorado Location with Grand Opening Weekend Celebration - 100th Location in the U.S.!</a><span class="meta">Mile High on the Cheap</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxQUUttcmlfZ2pWbHBZWWxYczFvVkR0Y2FqMmE2d01WT2VUdUtYd0EtSkJHTVptTTNOQVN6NVl5TkQybDFaTEM0bGNoY0E5S2o1VDUxMEdNR2lPRzJrMEtSRHNKald4Y2ZacW05M2FrRGJ1emVFMUhteU1zWlltYVdqUVRCUnFLRi1wVUxZVFdfM1ZvYWlURlZaSW5ZWHRObWRqN1NBeEZiazFDMlZfVDVTTW9URlY4QWN5UUpXdmpOSDIxaXFMVS1sUFk1eUc5MW5ObGxoM3JNUzM2d0ZWdk9ERzlFUdIB9wFBVV95cUxPUmhwcm1nNUwwMDV5d3hTdkF4NUpQMDRMQnpObGxKMUhrbTM4cllYeGYtaTZaRUt3N0Vsdkl5d2hNRFhYU2daOHp4aDk3TGN2UW9XcXhWVXFjdGg2c2tSUzNBR0hubjFoeU9zX2RSX3VBWFAta0JIeFVHOGUwZW1UZUJxTVlqQzVDTWphanpJUGtDMmVUVkFvSzlnaXo5TFNuVGluWE1VTkEtdGUtdk5WY3RWWVh1YXlWVDZSRlM4cVRzX2FUVnhaNXlBM0ZQaFF3bzd0aTBLM0d2b29WQVRmYndrTHpZNmRPSUh0cWdQM045bzBrTktv?oc=5" target="_blank" rel="noopener noreferrer">National sandwich chain’s first Georgia location holds grand opening; free food for year offer</a><span class="meta">WSB-TV</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMi8wFBVV95cUxPbHpZYmpTRnFiSWpCT2xZaGN2NEtFbjNmTU96ODBsSkc1R3M2UDBQUWFwSldCSndDTlBhelZFTFFVWFNDc2x2ZjlTUUtHeGVmNjFlMW1nd2EtNDNRdEpjbjJOYXNXTnRSRUtmZjhnZW1wUERvOTJsN1ZaV1BtbzRJVmNQcHhOU1A5ekVaR2tXX3cxdGxKc3I3MUU0bXlLMkpNODk5Y3JaaE1hQjBXejNXNzBtdUh6ckdxQVhjU05GTVFpNndDMjZXQjR1OGpqQW9JUnNrNERUTkcwS19KNjluSHVEMTFUYnZtanpFY3paa3M1XzQ?oc=5" target="_blank" rel="noopener noreferrer">Jersey Mike&#x27;s Just Held Its First Earnings Call and Revealed the Magic Number They Expect Every Sandwich Shop to Hit</a><span class="meta">entrepreneur.com</span></div></details></div>
+
+  <h3 class="sec">실행 아이디어 <span class="meta">0건</span></h3>
+  <div class="grid"><p class="dim">이 주차에 공유된 아이디어가 없습니다.</p></div>
+
+  <h3 class="sec">관심 브랜드 검토 현황 <span class="meta">0 / 0</span></h3>
+  <div class="card"><p class="dim">등록된 관심 브랜드가 없습니다.</p></div>
+
+  
+
+  <h3 class="sec">트렌드 자료 <span class="meta">42건</span></h3>
+  <div class="grid"><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOV2FSOTVLOTlwZzdSbHpoNWdSQnhFN0s0YS1uSDZFa1c0cU1NX3VYNmd1b3FuNEpkaE4zWEE4XzFqT2kzbmVDaWIzUV94NDg4S3kxY3VCTWRKZDhaY0EyWjJDd1dxOGFfR2JqR2lRdl9kdmw0Q3JOT0Zhb0JpS3J2QnpRTWJNLU44MFE5ZkQ2UjBYV2VqYlFUdWZqQ3hILW5zT3dMaHpUTDl5UFFLamNn0gHDAUFVX3lxTE90T1NKS2k2TEUzWXZ4UVd0VTBCenRCMjFkWjgwd0pFSVFzUThSUjByTkFpT0JQUThIYW5JQzRyWHBkU09WRmI3SGFTRFJhZXJOdmc0XzRQOHE1UkoyOFNtN0lLMGRvdDJKM1hzV0dzUk9VQ3hTSXdNSTdvWV9aX25Td3ZDZ3JVUmhKRS0zeFhvVmFCRzdQVWhFMXVNWm1nNTE2U0pRQUF6anEtcC1nZXlDdk1qeHN5TUs2bFB5WGZjUm1qWQ?oc=5" target="_blank" rel="noopener noreferrer">Tucson bakery Cafe Francais closing, citing economic uncertainty and rising prices</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">kold.com <span class="dot">·</span> <span class="mono">게시 2026.09.19</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE9Ha1E3SkRrb1BNVHJiZ2NwVEpUWnVCQjc0NnExY0dLalkyUjlZOXlEb195XzBaTDhhUHJncjl4Ri16N1hrTlJnUW96Nm9LSWowc1JRVjB5dEhid296UTM2WUZ2aVVqam1OQkNyVWtuczB2UQ?oc=5" target="_blank" rel="noopener noreferrer">&quot;아메리카노 옆 초계국수&quot;··· K카페, 간편식으로 객단가 잡는다</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">sisajournal-e.com <span class="dot">·</span> <span class="mono">게시 2026.09.19</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.nrn.com/restaurant-delivery/where-restaurants-fit-into-the-growing-couch-economy-" target="_blank" rel="noopener noreferrer">Where restaurants fit into the growing ‘couch economy’</a></h3>
+  <p>Thanks to conveniences like food delivery, daily life is becoming more centered on the home, according to new Visa data.</p>
+  <div class="meta">Nation&#x27;s Restaurant News <span class="dot">·</span> <span class="mono">게시 2026.09.19</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNUGF4bTlIUFg2ZS1GUWZBNnVSb1JVaTFfWmU2ZGpKOUVlNHNfdlo3NDhxbnhQRThPQlR1SWRsd3pmZDRvVk8yZFNQUzBVcDZtR1JRekpCWWRsRmdEd2owanRZYjFSbDZwU1dnZ2lJR1lvcWZjQWc5N3N3QTNxSEhFRlpsb19iMEVna2tIZVRYVHZJTlE?oc=5" target="_blank" rel="noopener noreferrer">Mère bakery-cafe to open in Cumberland this month</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Portland Press Herald - Maine Sunday Telegram <span class="dot">·</span> <span class="mono">게시 2026.09.19</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxQb1I2RWJBMDM1RENXaW5qQnNUSHN3a2FfVjhKOEJfZ3lrdy1VaENNaEY3bVEzTlp3Q1gxRFBjSU9hcVhmWGJSbkFqLVY4UEZOZUtpaW52VExrMVhUZ25vVTNtMW5lOE1xd09meXV1WWd6Tm03YmNRMUNwSWFxZjRRVWNzbTViTnRlOHVzaHhNOGlxUmtrZm1PQjRYVklxLXRhVTEyNTlBZDVYVEtzM3hLbEx5YXhKWUJOUTRzaTZzd0pkVURPeVJoREh5MXpfT0U?oc=5" target="_blank" rel="noopener noreferrer">‘Beer is king’ at this pub and sandwich shop anchoring a Rock Hill food hall</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Post and Courier <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5oQ0VlWW8yQlk5ckp5cENaN1RaTFp4bGNpVmNWQ1cybHhYVXdmaDZSVkRtcFZhQU9TenRqeVlBWWVDOXFydGpHb0FUcG12UnBnQ2Rrc1ZndlQxTGU1VWl6QWdJU0lhT1E3UG9SSW13?oc=5" target="_blank" rel="noopener noreferrer">여주쌀·고구마, 파스쿠찌 메뉴로 전국 공략…10월 신메뉴 출시</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">아시아투데이 <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFBxN09jMEZJM0JYOGNZbzlkQUZKX21nRFZtaVRTYWFHTnF5UHd4c2RRV0lDUjV4OTFkN3BfNVlHTHpQQVFqRlRYTUN5MTM2YjkzT01qbldQdUU1RWM?oc=5" target="_blank" rel="noopener noreferrer">여주시, 파스쿠찌와 여주 농산물 활용 메뉴 개발 및 홍보 협력을 위한 상생 업무 협약 체결</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">한국소통투데이 <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNbFhwQ0h2dGxxMEo3WHBiY3BPX21VZzVRNUxOYjZYbHR3MzM3NEFkenVEaC1MR3FVLUtEbTlwT0N3di1YSWxod2pCc2w4N3ZYVko3emtKc3lIRDlSV09nN3ZOMDd1X0VVbFVFeS1QYUQxZ2lNMjlDaXphY1lWN0owbm5GRk8wM2JFckJlNDhsNkU?oc=5" target="_blank" rel="noopener noreferrer">Beloved Pendleton sandwich shop opens sister cafe</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">East Oregonian <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQcGg4MFc1UzBHc3ltbkQ2TG1QVDEzNEU0R2t3dy1WOU5kdlE0bU11cU5zeno1NUN2NHJGSEpfbTVVMWN5WUUxR0psNDllaTBJOXN0aUREN3d0eXVuYk93NkZxRW1kTDBFR2dkenpEei1oQkJYQ2tqN2NVTGFQSXVha0dR?oc=5" target="_blank" rel="noopener noreferrer">85°C Bakery Cafe top Open 100th U.S. Location in Aurora, Colorado</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Yahoo <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQUE91UmZHcUdNMjdERXB4RTh3ZllaeW1WZFVtNWNpSE01X1NtMWZxMHE2bmdXTGpaQ3dmXzZYU2R6cTJEYlUySEhJNWg5X0tZQU9lck9aaHBmeDRiWGgxOGNCckhCRWdNaUVsLWtSZTM4REJqckF1WUVJT0JoVTBpWUlxVDdnaEowcHVTV1RLOFRKbjJvS21wak5TMVJ3dnlQ?oc=5" target="_blank" rel="noopener noreferrer">Paris Baguette plans new Connecticut bakery cafe in Enfield</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">New Haven Register <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQdWM5R2FPODBYZk00UU9COUt5NnlJVTl0bHJIeG9RajhQUnQ0RFZOZUYwTVdOMEZ3UlVtVW9mWTJrNHZwNDktMUEwa1JfY05vRmJINWUxSUhQUTBFRkN4dkVJaVphVG8wU1pjX3lCVWo4TUFpYU1WSWlYWDF3RGZkbGpvTFlyTDZMbE14cTRLLXZmVGlzeXJxXzI0bGVoa05Lc0VQRlk0X196S204MldiSEdhWTF0TGtyUUpFaTBOZ24?oc=5" target="_blank" rel="noopener noreferrer">Today! 85°C Bakery Cafe Opens First Colorado Location with Grand Opening Weekend Celebration - 100th Location in the U.S.!</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Mile High on the Cheap <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  <div class="dim sm">같은 소식 2건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxQUUttcmlfZ2pWbHBZWWxYczFvVkR0Y2FqMmE2d01WT2VUdUtYd0EtSkJHTVptTTNOQVN6NVl5TkQybDFaTEM0bGNoY0E5S2o1VDUxMEdNR2lPRzJrMEtSRHNKald4Y2ZacW05M2FrRGJ1emVFMUhteU1zWlltYVdqUVRCUnFLRi1wVUxZVFdfM1ZvYWlURlZaSW5ZWHRObWRqN1NBeEZiazFDMlZfVDVTTW9URlY4QWN5UUpXdmpOSDIxaXFMVS1sUFk1eUc5MW5ObGxoM3JNUzM2d0ZWdk9ERzlFUdIB9wFBVV95cUxPUmhwcm1nNUwwMDV5d3hTdkF4NUpQMDRMQnpObGxKMUhrbTM4cllYeGYtaTZaRUt3N0Vsdkl5d2hNRFhYU2daOHp4aDk3TGN2UW9XcXhWVXFjdGg2c2tSUzNBR0hubjFoeU9zX2RSX3VBWFAta0JIeFVHOGUwZW1UZUJxTVlqQzVDTWphanpJUGtDMmVUVkFvSzlnaXo5TFNuVGluWE1VTkEtdGUtdk5WY3RWWVh1YXlWVDZSRlM4cVRzX2FUVnhaNXlBM0ZQaFF3bzd0aTBLM0d2b29WQVRmYndrTHpZNmRPSUh0cWdQM045bzBrTktv?oc=5" target="_blank" rel="noopener noreferrer">National sandwich chain’s first Georgia location holds grand opening; free food for year offer</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">WSB-TV <span class="dot">·</span> <span class="mono">게시 2026.09.18</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPQU5CZ256d01KNXdaazkxcWxZTFVCUkpUQ3JFQUFoN1RVaEFCSk9UbGRwTUNWSERXTldHOEJ5X3Bxb1AyUG9HQXJ3cFlKSGFPNnRKVEp1SDFod0FRVWxPU3ZwMmdQQ19lQTRPWm9xRVlmU3pBbWljZWV5MnZyaU9DVGpNd2czQnZIME1IVWNHMzY1aUc2ZDBqeThqVTd5clUxQ0hCUjZaM0xJb2ttTmhJdXF6NTR3dnJoTHNxQ1RBMWlTQQ?oc=5" target="_blank" rel="noopener noreferrer">Founders of Sweet Pete’s Candy take over Desert Rider Sandwich Shop Downtown</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Jacksonville Daily Record <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.nrn.com/restaurant-technology/wonder-lays-off-more-than-500-as-it-consolidates-production-plants" target="_blank" rel="noopener noreferrer">Wonder lays off more than 500 as it consolidates production plants</a></h3>
+  <p>The food hall/delivery company is shutting down facilities in Cranford and Fairfield and moving to a higher-capacity site in Swedesboro.</p>
+  <div class="meta">Nation&#x27;s Restaurant News <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOSFA4dlBDZWtNcXZfbE9oS0VkTm51b0hzLUlSVzh0eEJhV0s5bkREV3pyVW1jVC15WFhJRGtIdUMxZFhSemdfdzBON3dHSFZHaHZJTzBjYkdQNnFpbTdpWFJYUEhXajVXUGhXaEVzbXdfWk5LcldsWjMtSUNLOVVhMXR6UENFTUpPNzB1ZmFFM1NmQkU2?oc=5" target="_blank" rel="noopener noreferrer">Sept. 17 Quick Bites: Da Cocinita Magic Taco&#x27;s comeback, Avondale sandwich shop reopens, Midtown sandwich shop closes</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Rough Draft Atlanta <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1NVWlhNFhhVndFMkstNkJ4cUNwd1RNRVpfbUxCYm5Qc3B5bWwyN3ZEVFBJWlZWT0FxdmpKRk1IRHpVNW5MUzNXbHBndGlhOTBtZVFCcE9GbGxPX1JkN1FGaUpFME5VNTM5UlhZ0gFvQVVfeXFMTkVfU1NNem1GdjNiRnJQM1FwdnEyMEVfUEZoRUpkc1JOQlNtZzNsUUxoS1hfNDdaUFFNLVJjV2M5YkRrVmd0aDl5TV9jVUFjS1NxTEttSjY4Q3RMbTZXUkl4ZWpDalJKanNMZkc3LWlj?oc=5" target="_blank" rel="noopener noreferrer">대전 중구, 파리바게트 대전선화점, 공동생활가정 청소년에 케이크 선물</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">e-빠른뉴스 <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9uc25EX0p5Y0ZMMEZNWTh3THBBQjFQT0RqaEdwaWZOMVY5QXV5bHNEYXh1QnJaYWVPYWhNSnNpSkVXc2NNVklZZU13QmNzdHhhOTFWSkRHcktsM3U1SHZkOXNpVQ?oc=5" target="_blank" rel="noopener noreferrer">카페 시사회에 유자메뉴·샌드위치...폴 바셋, 성장向 잰걸음</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">엔트로피타임즈 <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE00Q1ByTnAyZnMyTUZQdTdJblpQaXZUcUV0Rmp6SDRjd3RGRTdiSjVmWDQwT1hKT2h6azRCOXVaQWNISDlCZklwdzd6SnNiTHR4Q2xILQ?oc=5" target="_blank" rel="noopener noreferrer">투썸 떠나보낸 CJ푸드빌, 6년 만에 브런치카페로 시장 복귀</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">v.daum.net <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQUDJsT3doTl9WYTllTHdFbHRSMDJ1TThWaURVTnQzMGNRRU84VHFhUEVLVmlsNXp0VVJEVk1EeHh5NzJfX29TX0ZQQmg5aURsWkJ4cU14YUl4WkJFT09SUnJLYlY2eHZHUEsyZmRRS0dvZjF2dm9xSFc1dGRTOWg4QWVya0NKSVZlRGxxQ213?oc=5" target="_blank" rel="noopener noreferrer">커피베이·커피베이 익스프레스, 공주밤·흑임자 가을 메뉴 선봬 : 네이버 블로그</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Naver Blog <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxNdlNmSkkyVVFHUjdQR0JzTXh3WFVFY1FacjlfMjVvcF9zRkZxMDlKSUJmWGxkWmlRSDB2TXFhVVdFVGVDM2J6SXdfLTVKNHNuYmlQcmJsaGJrcl9KZ0YtX3dyZnAwYzdDTFBuTUF3eG1uT0lMdWN2eW9iUGs5R0JXZHkzNTBIc2wxTkVJR0JITXg3a1E2Vk1KSnNRSWRkNFRHTG1feWtsZkNzWFd0bS1MVTNMZnc3RjNsOU5FOENWOE80OXNZRWU3d2pEVElpR2dKQWo1a2U2VGR3c1R4TFFjLW02aTZuYzZ2d0dWRHV5M3RBRjZDbGJyYmMzSzVadw?oc=5" target="_blank" rel="noopener noreferrer">Colette Bakery Cafe family plans fourth cafe on Mass. Ave. in Arlington</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Wicked Local <span class="dot">·</span> <span class="mono">게시 2026.09.17</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.fooddive.com/news/folgers-functional-coffee-protein-fiber/830509/" target="_blank" rel="noopener noreferrer">Folgers launches functional coffee line featuring protein, fiber</a></h3>
+  <p>The J.M. Smucker-owned brand is stepping into health trends by highlighting ingredients to boost energy, focus and digestion.</p>
+  <div class="meta">Food Dive <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE1IQS03QWREMkxhS0ZrRlhkSnhuOHU1SFNLQnJrQ0EwRmhiUHVCekRyX0t0SzFKVXRkV1JPWngydk90a2tBdHBZNWt3?oc=5" target="_blank" rel="noopener noreferrer">[k-한식 디렉터 장윤정]이 전하는세계 요리의 유래 프랑스 바게트가 베트남 국민 샌드위치가 되기까지, &#x27;반미&#x27;에 담긴 역사의 반전</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">얼리어답터뉴스 <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPSnFlUmh4d1hEdWE5VVlQM2l6MF9IVVhRcVd4U1l1Rmg5cXNGWDBiS3FsSTNMbkhFUkstWElkXzJuWHViQ0NhbFFJdEF2bzNxNVRuYUQ1NjVsZUdMNG5TbDNVWlBxaVJEZGEwcmEteFh3Z0dzekVFS1dDMnhZQmF3RGFtZVBLY21EaFR6TFZ4c3BCR2hSa2VKaGNR?oc=5" target="_blank" rel="noopener noreferrer">Late night fire damages dry cleaners, sandwich shop</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">News Channel 6 | Wichita Falls, TX <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5DckxmVDBjZ1FXWDExQ0M4MTJJSnRYZmh6VG5IM2lKcVlVUVN3ZTREall0bUFIcjNhS2s2R0otR1ZTcVNzbk83NTIwb0ZQY1VlZlVBbzNvYVpFdFBLR0U0WE12QUVubHpMMnAtanFLOEtpN1ZF?oc=5" target="_blank" rel="noopener noreferrer">우지커피, 흑임자와 에스프레소 조화롭게 담아낸 가을 신제품 출시</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">대한경제 <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE9vdXR3NkZfSlVUMGZYaS1KcUItNDhJZUp1bDFZZE5pa3kyTnJCelNyRllaeHhxajNNNWlsckVSV0ZyQUFNcm1HRkhiNl8zbFk?oc=5" target="_blank" rel="noopener noreferrer">“부모도 자식도, 이젠 웬수 같아요”…‘샌드위치’ 돌봄 중장년, 내 삶이 없다</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">v.daum.net <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOSzY5Y3cwb2RsYmlCM1pFZXZQY2hicUFRRlJNXzRLRVRkTHhGd0NpcVM1dGNsRVdyQmU2VERKdWRWVWpGTHlOeF84eGw2T2dwNU5mWmg5RWlJc0h4dk4xWXNzSlVyWWR5Vkl5T1dVZktwdnZScmZsa2pVaEFPUy1MZXdkU0UtQTdDbk81Ylp1Q0tLdWdWcmdkQXBOMFIyME9n?oc=5" target="_blank" rel="noopener noreferrer">Edd’s &amp; Flo’s Artisan Bakery Cafe Sets Sights on Fishtown</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">WhatNow <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOd2prVzIzZ1lZbG5kN0NjVnB3V2d2a3V4X2NYQWJnV3RaOFlZOUN2eWU0bGdTcXdkWEl5WkppWDZIRGNkOWF2bnl2T2h3TmFzYUNjX2RkNG41cVl6REJNUlY0bUJiSW92bkdqNnpLeXBINWxtNmc4aVFtQmRKR1F5NzZCZVhxVGc4ZDNZZlFQUDBfQ29rcmVwYUM3V3BkQnhv0gGmAUFVX3lxTE9xclowNVFMS2M5LTZkUkp2bGVJSXZ6VHVQY2dXX0xhZkk3RFlQLU5hTFlNakotVExTTEMwZlZMUkhSMzhodE91aWFIdHhzY1hCV1UwODJJcG9nMUExcV9zQVJhT0trRkxfQWVkRVF6ZTFidnd3LWtMMnoxZ3pLRXJoUHJGbTJkQzIwUk9pZWtjOTRHRGFhc0loSUhYS0JNRDFjOExrNXc?oc=5" target="_blank" rel="noopener noreferrer">Desperate For A Job, I Applied At A Sandwich Shop. The Response I Got Was Soul-Crushing.</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">HuffPost <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.nrn.com/fast-casual/einstein-bros-bagels-adds-three-new-leaders-to-c-suite" target="_blank" rel="noopener noreferrer">Einstein Bros. Bagels adds three new leaders to C-suite</a></h3>
+  <p>With a goal of reaching 1,000 units by 2030, the fast-casual bagel concept has brought in new chiefs of development, people, and finance.</p>
+  <div class="meta">Nation&#x27;s Restaurant News <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE1veHZqelpJUHRlN280eThrUGF0cnRzMWUzandZTnpkRHBUQ3gwZENyR0VlTHgxY3hRak05Yzg5NGwxOFZxQkFFYlpJU2M0VnREUDEzUmZoenNZYldRbDZmQTBxYjdGYlpaUUtLSUk1ZkFQUUdsTmlGTkJn?oc=5" target="_blank" rel="noopener noreferrer">Defonte&#x27;s Sandwich Shop Red Hook, Brooklyn, New York — Restaurant Review</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Condé Nast Traveler <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.nrn.com/restaurant-technology/doordash-invests-125m-in-wonder-as-part-of-strategic-partnership" target="_blank" rel="noopener noreferrer">DoorDash invests $125M in Wonder as part of strategic partnership</a></h3>
+  <p>The delivery company is also acquiring Grubhub’s campus dining business from Wonder for $300 million.</p>
+  <div class="meta">Nation&#x27;s Restaurant News <span class="dot">·</span> <span class="mono">게시 2026.09.16</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE5NcWJ3TEFaUWF5VVVjbEtzQ2pZaTdjNExSY1ZWbDB4M0ZWSnhEc2NFdW9KRnRQQW5JUDBfV21sSTZRRXNra2hFVVJlZGx1UkszQ2FFcVJlQW1nRHBwRkdOblBDbXprRGljRDhLMVZCUkZUZw?oc=5" target="_blank" rel="noopener noreferrer">신세계푸드, 가을 무화과 케이크 3종 출시…제철 과일 디저트 확대</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">인더스트리뉴스 <span class="dot">·</span> <span class="mono">게시 2026.09.15</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://www.thinkfood.co.kr/news/articleView.html?idxno=201194" target="_blank" rel="noopener noreferrer">[09/15 오늘의 새상품] 롯데웰푸드 ‘쉐푸드 광장시장식 고기완자’, 풀무원식품 ‘식감혁신 본격 떡볶이’ 2종, 샘표 ‘우리아이 순 참기름’, 파리바게뜨 ‘감자쫀떡’, CJ푸드빌 더플레이스 ‘대하 로제 파파르델레’, 맘스터치 ‘싱글피자’ 3종, KFC ‘오리지널 딥버켓’, 이디야커피 ‘우리땅 고구마 말랭이’, 컴포즈커피 ‘밤 티라미수’</a></h3>
+  <p>롯데웰푸드, 시장에서 갓 부친 전을 집에서도 ‘쉐푸드 광장시장식 고기완자’100% 국산 돼지고기에 도톰한 통살…풍성한 채소와 감자전분·국산 찹쌀가루 배합롯데웰푸드가 추석 명절을 앞두고 집에서도 간편하게 즐길 수 있는 ‘쉐푸드 광장시장식 고기완자’를 출시했다.‘쉐푸드 광장시장식 고기완자’</p>
+  <div class="meta">식품음료신문 <span class="dot">·</span> <span class="mono">게시 2026.09.15</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE1OWXp1SXpTc1ZHeVY1bmNBUDQtejFXeG56VlZHaXlVNVZPaGZuU2tuZ211Y3FRQWxvbHdlQXNvVldKR3VuZmRnWDNCaXltd00?oc=5" target="_blank" rel="noopener noreferrer">커피업계 ‘밤’에 빠졌다…컴포즈·스타벅스·이디야, 가을 메뉴 전쟁</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">v.daum.net <span class="dot">·</span> <span class="mono">게시 2026.09.15</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.nrn.com/restaurant-franchising/flatbread-sandwich-specialist-cos-to-license-its-brand-as-a-virtual-catering-menu" target="_blank" rel="noopener noreferrer">Flatbread sandwich specialist Così to license its brand as a virtual catering menu</a></h3>
+  <p>The fast-casual chain that once had hundreds of locations now has 16. But Così is looking for partners who might want to generate revenue with catering.</p>
+  <div class="meta">Nation&#x27;s Restaurant News <span class="dot">·</span> <span class="mono">게시 2026.09.15</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE9oc2RrNUIxRGE0SEQ1YzRwMm1vdGZIRzlEZFlBdUdRMExmM2lHMlNFRmFLT0xqOThtWkI3Q0xDVklDdGFtRUNmT2hwTE1xcUFZNko3V2c3STNnZjUyRmVZOXlzT3JCbTdsZEJlenVNRzJjT092SUNN0gF3QVVfeXFMTVZLM21JaXRnMHZXYTFpWVBSMXRIajdJRFdkZVVXd0pMdXdUdUR6UDZ0dEpBSkg0cTh5SUJzbVJwRThOZjFiMzN1OHBRS2VnSndFeFhHX1NYSXZXMzN0TF9QY2FtVWhtOG1KZnFvOXd0RmQxakNqQTA?oc=5" target="_blank" rel="noopener noreferrer">After more than a decade in business, a North Hills sandwich shop will close</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">News &amp; Observer <span class="dot">·</span> <span class="mono">게시 2026.09.15</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">마케팅</span><span class="chip line">해외</span></div>
+  <h3><a href="https://www.nrn.com/quick-service/will-yum-buy-another-brand-how-can-jersey-mike-s-reach-young-people-and-why-is-walmart-delivering-for-papa-johns-" target="_blank" rel="noopener noreferrer">Will Yum buy another brand? How can Jersey Mike’s reach young people? And why is Walmart delivering for Papa Johns?</a></h3>
+  <p>Plus, a review of new marketing campaigns from across the restaurant industry.</p>
+  <div class="meta">Nation&#x27;s Restaurant News <span class="dot">·</span> <span class="mono">게시 2026.09.15</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMi8wFBVV95cUxPbHpZYmpTRnFiSWpCT2xZaGN2NEtFbjNmTU96ODBsSkc1R3M2UDBQUWFwSldCSndDTlBhelZFTFFVWFNDc2x2ZjlTUUtHeGVmNjFlMW1nd2EtNDNRdEpjbjJOYXNXTnRSRUtmZjhnZW1wUERvOTJsN1ZaV1BtbzRJVmNQcHhOU1A5ekVaR2tXX3cxdGxKc3I3MUU0bXlLMkpNODk5Y3JaaE1hQjBXejNXNzBtdUh6ckdxQVhjU05GTVFpNndDMjZXQjR1OGpqQW9JUnNrNERUTkcwS19KNjluSHVEMTFUYnZtanpFY3paa3M1XzQ?oc=5" target="_blank" rel="noopener noreferrer">Jersey Mike&#x27;s Just Held Its First Earnings Call and Revealed the Magic Number They Expect Every Sandwich Shop to Hit</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">entrepreneur.com <span class="dot">·</span> <span class="mono">게시 2026.09.14</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxNeFBrSWNqd0doc1RBbFhreW90dUY2enRvdDRHUF82MW9jdmE1Qk9XWVNodE1Sa2g4OU1UcEx2WGItb0hSdDJZU2pXZ09uMHZIbENQRTJTNUxZYV9XWmVQLW1fQmRMMDZNY0c2aXpmNnBSZ1JtSGphcUNQQmFLRDlLMnQ5d0NGZjAzWVhmUmR1NllkeWxTM2pKZFFvd3JUc2ZfVXBqUQ?oc=5" target="_blank" rel="noopener noreferrer">This 13-year-old opened up a sandwich shop to serve his community</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">investigatetv.com <span class="dot">·</span> <span class="mono">게시 2026.09.14</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1TeXlqdjZLZDgyVVpXWC1TTmRaRGF6RDNtZml2RUJfXzltM0JDMDk5YkdzNDZCa3pMZlNXNUNRRG5PZTdqQmFLSWxVd2YyN3pLMnl3VEY2ZmdBTHplZ09GbjNxYW0wMEhKZjNCam1OZE5iT1U?oc=5" target="_blank" rel="noopener noreferrer">[오늘Who] CJ푸드빌 카페 사업 재진입 초읽기, 이건일 &#x27;투썸플레이스&#x27; 경험에 &#x27;브런치&#x27; 얹는다</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">비즈니스포스트 <span class="dot">·</span> <span class="mono">게시 2026.09.14</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE8xN0JtM1JkWEtrUGNUOFlySlUxancxaEgzUk5zV1FfRmV2U2dhLWI0VGItLUc4YnBaX1hsOUVTRG9KYWVjUndyQWhaS2otbG1nOGU4cXd5RXhabHphSFdDYkx0ZkxYTjhqckszbldKUnh6dW8?oc=5" target="_blank" rel="noopener noreferrer">파리바게뜨, 건강빵·샌드위치·샐러드로 한 끼 공략…&quot;일상식 수요 겨냥&quot;</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">핀포인트뉴스 <span class="dot">·</span> <span class="mono">게시 2026.09.14</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="http://www.foodbank.co.kr/news/articleView.html?idxno=68497" target="_blank" rel="noopener noreferrer">빽다방, 월드 바리스타 챔피언 엄보람 협업 ‘챔피언스 블랙벨벳 라떼’ 출시</a></h3>
+  <p>더본코리아(대표 백종원)의 커피 전문 브랜드 빽다방이 2023 월드 바리스타 챔피언 엄보람 바리스타와 협업한 신메뉴 ‘챔피언스 블랙벨벳 라떼’를 출시한다.빽다방은 커피의 맛과 품질에 대한 경쟁력 강화를 위해 지난해부터 엄보람 바리스타와 협업 해 오고 있다. 지난해 4월 스페셜티 원두 2</p>
+  <div class="meta">식품외식경제 <span class="dot">·</span> <span class="mono">게시 2026.09.14</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBVSVJlRkU5dkJUeGJyT0pmSUVoMGhBYWJLbDlrYUNoa0tybzlCblo2N0VsU3BOMGN4bV95cWhpYnNEdkRmXzQtWnZGZHQ0cFh2NG1sLWQwY012M0dRdl9ZWDZQODhwOE9TdXRn0gFvQVVfeXFMUEtiRlZvbHIwNDVyQ2o2eUh0T3VfQTBCVlJEdDQ5ckNqZE5yZjBlTTVyWFZ3Mm55emlWMW1fRzRCU0lDTXN0RmR0Y3VWazFxdHpQdzRYa3RrbkMySWtDN1h0aGRHY0xlSVBjU1kxWGI0?oc=5" target="_blank" rel="noopener noreferrer">BBQ 파티센타, 래미안 원페를라서 브런치 행사···프리미엄 주거단지 F&amp;B 확대</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">글로벌E <span class="dot">·</span> <span class="mono">게시 2026.09.14</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article></div>
+</section><section class="week" data-week="2026-W37" hidden>
+  <div class="wkhead"><h2>2026-W37</h2><span class="meta">2026.09.07 – 2026.09.13</span>
+    <span class="meta mono">수집 2026-09-21 17:02</span></div>
+
+  <h3 class="sec">자료에서 확인한 사실</h3>
+  <div class="card"><ul><li>수집 27건 — 국내 20 · 해외 7</li><li>분류 — 메뉴·재료 24 · 브랜드·매장 3 · 마케팅 0</li><li>근거 2건 이상 키워드 — 샌드위치, sandwich, 카페, 가을, chain, opens</li></ul>
+    <p class="dim sm">집계한 숫자만 적었습니다. 좋아요·댓글 수나 매출처럼 확보하지 못한 값은 넣지 않았습니다.</p></div>
+
+  <h3 class="sec">활용 아이디어 요약</h3>
+  <p class="dim">이 주차에 작성된 활용 아이디어 요약이 없습니다.</p>
+
+  <h3 class="sec">주목할 흐름 <span class="meta">서로 다른 출처 2곳 이상에서 반복된 것만</span></h3>
+  <div class="kws"><details class="kw"><summary><b>샌드위치</b> <i>7건 · 출처 6</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOc3dod1U0dWZKdkxweV81X1J2dG90bnZFMURudGVXNWdBOE5Rd0dBMFpQWTNtMjNSWWhjX195WVJxOHhIOEFjRlQ5ZnZ1UDVocVc4bldpZ3d6ZGtFdUhkdTg1UVYzN1ZGaFpsdENjLXNFaTBPNDNha19PWW4wOEVRdjJsRy1Sb3BfLVY5QzR3?oc=5" target="_blank" rel="noopener noreferrer">미국인 셰프가 샌드위치를 ​​8만 8천 VND에 팔자 손님들이 줄을 서서 기다린다.</a><span class="meta">vietnam.vn</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTFBpLVltaU9Wa2RqZkRyTUpxTjVob1lSTjQ4S0x6Z01lZEZsOUFjU0pPQ3AxVDNkN1hEV1BjNTRMZ1BqTTFzcXB5N01zdk5KdV84UXBpTXVxTVRKNkRMSnBFckQwV0Ztb180UlMxdXdVS0FVM2RWUXfSAWZBVV95cUxNQk5kbEVNcWFfcVJzSU5wZnllelRtVEE2WjRpeThUUExnOG1Cb050SThKSWJVdHM2WlBZeUJTbXM3WVJORnZjYXRPU0FfZ01aT3JKUG9HbTJTeGJqMHBoeUQxeHRjdUE?oc=5" target="_blank" rel="noopener noreferrer">파리바게뜨, 맞춤형 케이터링 시장 출사표…‘샌드위치 도시락’ 선보여</a><span class="meta">동아일보</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE1hWnpCREl1MWxoX0NRLUhvVEpreGtWc1NtSU1mdDY4S1AyYWhaOTdpeWZOdzBUM0VHcHdodGktWEdSeG1vMzFzU0dFejFvSHU3X1p0ZkNwMDFnQUxoejFvZEhtcFo?oc=5" target="_blank" rel="noopener noreferrer">“샌드위치·디저트를 한 상자에”…파리바게뜨, 케이터링 박스 선봬</a><span class="meta">서울경제TV</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1qR045dDVTWXNESEdRTVBUQVpncmdFUHV2RzhCc3JtRTBvTDZjZG56V0o0eHVBRHY3MzlpOGpycmx5QU94azNhR01kWE9BREwzQTdadGUyMTFsV1RBVWlpX3Voa3ZEVU1ydjdqZA?oc=5" target="_blank" rel="noopener noreferrer">이용우 부여군수, 박수현 도지사와 &#x27;샌드위치&#x27; 조찬 간담회</a><span class="meta">충청뉴스</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBqR0FzQmNDVG02TjdNdkdONXlHRWw4ZVVJMFBabU1pWVpLT1FVWlRyM0JaR19rRjJlNjRmTGdqYll0ZldWSHY1SE1fUFpnVThsajhJX3ZOTjhod29GWUVwT21Ycjh5VmE1cHdlMlRidXY?oc=5" target="_blank" rel="noopener noreferrer">퀴즈노스, 가을 신메뉴 &#x27;숯불치킨&#x27; 샌드위치 출시</a><span class="meta">shinailbo.co.kr</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTFB6aUNjdXVqYXdZVnVZdnM4Nm9EdnBRakw3ZjZsb0hTRzF5bDVicEwwZ3U2ZFJVRWc1dUJqd0xJQWdRa05SaThBOG5nM1h0RkhUMFRGNDUzSXFDMUo3OUtqWEJGNDJkcmluSVMtbjZnZzFxei1qNC1aeE9yTnNBVU0?oc=5" target="_blank" rel="noopener noreferrer">햄치즈부터 참치마요까지… 영양사 꼽은 ‘가장 건강한’ 샌드위치는?</a><span class="meta">헬스조선</span></div></details><details class="kw"><summary><b>sandwich</b> <i>5건 · 출처 5</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9nMFczWDdmRF9FbXdIZ1htRjVVVlJKbGFwbjM3Z2RheFdBaXVUZmI3S3JSbHlQOGlURnlYM05wa0paYWdMOFJZbE5sSW1WVnRsSlNVaEN6VmJwb2VmdG1jWko4TTJ1MGxLMkc4eFJrMHZ6RDNZMnU2bVg3OGl3M0U?oc=5" target="_blank" rel="noopener noreferrer">7 Things You Need To Know About Canadian Sandwich Chain Mr. Sub</a><span class="meta">Tasting Table</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxQd0xqZHZTV1JMSXhCR0Vvam10dWs3UFNHeWN1TWxldWpaZktZd0NkTEhpREdqRTh3WHNJbFJqbEZ3TlpqYkJWbjZ5X3E5WmdyaElZMmZTSHZsbS1WUksza19sZHE5VjFSZ1M5RkNPdlN3Tkx0ZXpyNUJzNVBuQkdUTDE1TmxKQmZXNk40MVFXVlV3NEsxNmx2SmtMcHJUY1RaLVpZZVFLdVlhM00xRXhzMjNzNHQ0akJw?oc=5" target="_blank" rel="noopener noreferrer">Tulane announces new popular Uptown sandwich shop vendor at Yulman Stadium</a><span class="meta">The Tulane Hullabaloo</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxONm5uMUJaWGl0U25SQ1ZFNXZWR3VLT0Y3RjJDdWY2cVpHelMweUI5ZnB1aU5hVTh4UjJzcUNPZWNCODZxRFRaYy03N0pxRXJHeUVMOTFTb25lX0pybFlmQmdhUl9pWXdPV0NZUEpTZmJKM2txdW9WY21mS1pUZDVlVTdoYUdpUmFlS2ZoWGNfLWpuZ1NOczNGSFh1MmpVQzdG?oc=5" target="_blank" rel="noopener noreferrer">Popular sandwich chain with toasty subs opens first location in major market</a><span class="meta">Yahoo Finance</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE5qOTRGcllkeUNwSXJKMGdoMUlvUlNtWS1UbmZkY0hxZm12cXM5b3lnUmNoMTExcW4yZTJKYm5CN2JFX09ub3ZmX2E3Y0VuTFg0alZJZE5KeU5TZXNJ?oc=5" target="_blank" rel="noopener noreferrer">According to locals, Joe Leone&#x27;s Centro is where you go for the best sandwich at the shore</a><span class="meta">92.7 WOBM</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPSXpaTjZucTBLU1F1UUZNT0I1WGt5eVdYR25QWExhNVhJbkFYVGhDR3AyQXdYWUJUWGNfcndjTU0zRU5iUFQzemdVUzdacG51QVR3ZUR2aGJNeDFvUy0tNEE1OUVJTHl1dGNQZVdHUlJuRk5rN3VCN3djcGE0TS0zNDE4Vzc1eHgtWnJ1aF9nVE8xWEFWVXM4ak9EZmw?oc=5" target="_blank" rel="noopener noreferrer">A 13-year-old and his grandpa run this sandwich shop together</a><span class="meta">KFYR-TV</span></div></details><details class="kw"><summary><b>카페</b> <i>5건 · 출처 5</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFB2MDNrN3JrNGxvOGZMMmt4cjV1RjAxRlJETW5IcWxseThMUGluMi16d2dPTGRMS2JaWlIwTTJweWc1SE41NTBQWDh6UU56bmZWd213UnlqMHBFUlVNdkVWNnpqaXFNdkFzcGfSAW9BVV95cUxPd2lhMXIxLUxiQzAtYmU4UGJNNG52N1pJZm14UmpudHF3Y2oyZWJjYkpqOU83UWJrVzhIR0ZaeFFOYVhkVWVYTDNRb2RWYlN2eEtPUGZ5VG5vUjY3a3ZuaU9USVJiRWFuam1EdFJmTG8?oc=5" target="_blank" rel="noopener noreferrer">&quot;고구마는 마시고 밤은 떠먹고&quot;…카페 메뉴판에 가을 왔다[핑거푸드]</a><span class="meta">머니투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE1UMzVTdTVfai14Nk9qeGdIcEJYNFFwN3hWcHlMUFlKVFJhTzJWbU5lMVUwdW1SclVqNEZuVmI3ZzV1d09YWklwaVNwYVBwQ1A2UHRoSEFORlhrUQ?oc=5" target="_blank" rel="noopener noreferrer">추석 연휴 &#x27;드라이브&#x27; 가기 좋은 서울 근교 카페 5</a><span class="meta">esquirekorea.co.kr</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lSmhMY25vTlZYT2N0aXdWQUJ5OUNCRzRhMThzZzdFajFxdHRiYmtneEVUYzRkZGotejBhRERydDBMeW04eW5wZldUcC1SZ09HbmlSRVhfZWNOMmNPQTlB0gFkQVVfeXFMTWFvSmxmRnVHaFgtb1JDeW5UOWZaVDZ4eUVPbXU4NFF5MnV5ZnlVSzZQSnZkdDFtSlVmaDJ0TXNjajRNSFJKdmNGZzA0VzIwMVRUYTE2aXhVRjlNcXJsc2diY2Vrcg?oc=5" target="_blank" rel="noopener noreferrer">&quot;카페에서 맛보세요&quot;…보은군 향토 음식 신메뉴 &#x27;대추곰&#x27; 판매</a><span class="meta">뉴스1</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5sR1pkOVdDZ09pU0E0RnRIOGVwMkRVRWQ1Mm5JMWhaM2k1RVdHOFRPNTZOWGZWc1hSSTlZT0tmRmU4c0RkQjBGVzBwT3pVUzFkLVE?oc=5" target="_blank" rel="noopener noreferrer">켈리토스트카페, ‘토스트+카페+디저트’ 운영 모델로 신규 창업자 공략</a><span class="meta">youthassembly.kr</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE5PT1BydHVMQTBHR2ozVWpkenNQWGNkbXJzYnM1MHFCTmMweTdpbElDLXR6QVY0ZFBuaFBzTGdWRktnMXI0enFVM0dnQVNadFVmeUJSNlBweUFKVEJ6bFVNR2p3?oc=5" target="_blank" rel="noopener noreferrer">커피를 화분에 담아준다고? 멜로즈 신상 브런치 카페 [영상]</a><span class="meta">미주중앙일보</span></div></details><details class="kw"><summary><b>가을</b> <i>4건 · 출처 4</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE5fdUlUeEtaZzJQTkdaazBVRlFXQVhPY2VSN3EzMGpFWjRVenQtUndES1RiclJaN1lpZ2JCNjZPNlhIekdMdkE?oc=5" target="_blank" rel="noopener noreferrer">밤·홍시·흑임자 다 모였다…카페업계 가을 메뉴 ‘제철 전쟁’</a><span class="meta">v.daum.net</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFB2MDNrN3JrNGxvOGZMMmt4cjV1RjAxRlJETW5IcWxseThMUGluMi16d2dPTGRMS2JaWlIwTTJweWc1SE41NTBQWDh6UU56bmZWd213UnlqMHBFUlVNdkVWNnpqaXFNdkFzcGfSAW9BVV95cUxPd2lhMXIxLUxiQzAtYmU4UGJNNG52N1pJZm14UmpudHF3Y2oyZWJjYkpqOU83UWJrVzhIR0ZaeFFOYVhkVWVYTDNRb2RWYlN2eEtPUGZ5VG5vUjY3a3ZuaU9USVJiRWFuam1EdFJmTG8?oc=5" target="_blank" rel="noopener noreferrer">&quot;고구마는 마시고 밤은 떠먹고&quot;…카페 메뉴판에 가을 왔다[핑거푸드]</a><span class="meta">머니투데이</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBqR0FzQmNDVG02TjdNdkdONXlHRWw4ZVVJMFBabU1pWVpLT1FVWlRyM0JaR19rRjJlNjRmTGdqYll0ZldWSHY1SE1fUFpnVThsajhJX3ZOTjhod29GWUVwT21Ycjh5VmE1cHdlMlRidXY?oc=5" target="_blank" rel="noopener noreferrer">퀴즈노스, 가을 신메뉴 &#x27;숯불치킨&#x27; 샌드위치 출시</a><span class="meta">shinailbo.co.kr</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5reHh1ZXFCelQwZkNxYWRhdkUtN3NjY1M2SlR6clhDT1FRaFA2UDFrSTB2bXFTUXlUa2VjR2Q1QllDV1hxbE9yaWltWjNMZk8tRWpQVS1oaFN6R1dDU1phatIBeEFVX3lxTE91N1RGWExlMWVDNzZnRFNlbHkzcl9pVlZ2cnJpcDkzclFOdk41WFNHOW42RFhCdGRsRXAxeDdRSkllMF9GZzNub0xHQ0N1bEYxakFSVHlVUFhCS1R0dlZEcW0tSklFaXlzSXBoV050cnUzVENnZkIwMg?oc=5" target="_blank" rel="noopener noreferrer">&quot;알록달록 가을이 왔다&quot; 카페업계, 신메뉴에 계절감 입힌다</a><span class="meta">뉴시스</span></div></details><details class="kw"><summary><b>chain</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9nMFczWDdmRF9FbXdIZ1htRjVVVlJKbGFwbjM3Z2RheFdBaXVUZmI3S3JSbHlQOGlURnlYM05wa0paYWdMOFJZbE5sSW1WVnRsSlNVaEN6VmJwb2VmdG1jWko4TTJ1MGxLMkc4eFJrMHZ6RDNZMnU2bVg3OGl3M0U?oc=5" target="_blank" rel="noopener noreferrer">7 Things You Need To Know About Canadian Sandwich Chain Mr. Sub</a><span class="meta">Tasting Table</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxONm5uMUJaWGl0U25SQ1ZFNXZWR3VLT0Y3RjJDdWY2cVpHelMweUI5ZnB1aU5hVTh4UjJzcUNPZWNCODZxRFRaYy03N0pxRXJHeUVMOTFTb25lX0pybFlmQmdhUl9pWXdPV0NZUEpTZmJKM2txdW9WY21mS1pUZDVlVTdoYUdpUmFlS2ZoWGNfLWpuZ1NOczNGSFh1MmpVQzdG?oc=5" target="_blank" rel="noopener noreferrer">Popular sandwich chain with toasty subs opens first location in major market</a><span class="meta">Yahoo Finance</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQa1hsczhhQmtVWm1Bc3BuelhPa2h4RExFRDJIMzNBalRaSUJvN3dVeWNQcEZiZ2ZvbUNWWFNZaFkxYVhMYUc1VHY4ZGRCSkFxWUgtbjRlazZwNlRnVUFSNWRWdDN5YzM4VzA3VERYTHJtSVVsMVBjQVczUGtVdmJRa1UtMUJBSUh3UXktNmlZN1Rrd2xpNTQ4M1Qyazh4VEJzd0gwUTVqa0ZIN1JwS2N1bw?oc=5" target="_blank" rel="noopener noreferrer">Local coffee chain opens second location as national chains expand in Albuquerque</a><span class="meta">The Business Journals</span></div></details><details class="kw"><summary><b>opens</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxONm5uMUJaWGl0U25SQ1ZFNXZWR3VLT0Y3RjJDdWY2cVpHelMweUI5ZnB1aU5hVTh4UjJzcUNPZWNCODZxRFRaYy03N0pxRXJHeUVMOTFTb25lX0pybFlmQmdhUl9pWXdPV0NZUEpTZmJKM2txdW9WY21mS1pUZDVlVTdoYUdpUmFlS2ZoWGNfLWpuZ1NOczNGSFh1MmpVQzdG?oc=5" target="_blank" rel="noopener noreferrer">Popular sandwich chain with toasty subs opens first location in major market</a><span class="meta">Yahoo Finance</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQa1hsczhhQmtVWm1Bc3BuelhPa2h4RExFRDJIMzNBalRaSUJvN3dVeWNQcEZiZ2ZvbUNWWFNZaFkxYVhMYUc1VHY4ZGRCSkFxWUgtbjRlazZwNlRnVUFSNWRWdDN5YzM4VzA3VERYTHJtSVVsMVBjQVczUGtVdmJRa1UtMUJBSUh3UXktNmlZN1Rrd2xpNTQ4M1Qyazh4VEJzd0gwUTVqa0ZIN1JwS2N1bw?oc=5" target="_blank" rel="noopener noreferrer">Local coffee chain opens second location as national chains expand in Albuquerque</a><span class="meta">The Business Journals</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE1FYmppOTVnYnhUSGpHTW05dGtyMGhVVG9DeTFyX0dDblFCMGdwSTVPV3A4SHBFQTVVbTgtQW5faGczWkFNN0ZEWExIRm9XUXBTMnpYUXFXRFpqSDN0WEkzQjJjTzl4cGJ4X1RUSGM3MlQ?oc=5" target="_blank" rel="noopener noreferrer">Dän Bakery + Cafe Opens in Hoboken</a><span class="meta">Hoboken Girl</span></div></details><details class="kw"><summary><b>브런치</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOVmV4c3o2Rkk1UXJpaml2VWpRUXZqaVJoUWVfOXVlel9QUS13THdwNjVZdk9JUG5BQlhjTVVaOTJqaXd5SF9vX3JNSXZoNHpnZGFKQWx4dzM1VEFFR2lfZmt5OFgtMnRpalkwOExPTEZLdDJxSjBCNG0wbkxmOGtMXzNJR1Nzd9IBmgFBVV95cUxNLUFrQnFVb2NPNE5UWjIwT01DOV96cEo5b3pEc2xaT2IzRnQxYnBkYlFJWGdxOGNZckNYY2kyZTE0akZ2cEZ4VVVfdWRMcThMQWQtSFNfNmlvd0ljZjlaQ05FREhTbFNxc2I2T2kxZERmenV2cFo5TWltX19VTUltYW9aeUZKX1hXR0I3VXl1V0J4eExCREx0TTJ3?oc=5" target="_blank" rel="noopener noreferrer">[Why] 브런치 열풍 이끈 ‘리코타 샐러드’… 그 많던 매장은 어디로 - 조선비즈</a><span class="meta">Chosunbiz</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE1JaEdxWkYwbkFMOXd0Uk1mWDR3TTB5dDE4M2Q3WWNZbjFSSENsTmR4QUFyb3R4UEk1UGpXaG42Y0pyLTJqcHd3SGRHU2syeGNkb2c?oc=5" target="_blank" rel="noopener noreferrer">우장산브런치카페 스윗온유, 작은 정원에 머무는 듯한 여유와 셰프의 브런치를 만나다</a><span class="meta">youthassembly.kr</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE5PT1BydHVMQTBHR2ozVWpkenNQWGNkbXJzYnM1MHFCTmMweTdpbElDLXR6QVY0ZFBuaFBzTGdWRktnMXI0enFVM0dnQVNadFVmeUJSNlBweUFKVEJ6bFVNR2p3?oc=5" target="_blank" rel="noopener noreferrer">커피를 화분에 담아준다고? 멜로즈 신상 브런치 카페 [영상]</a><span class="meta">미주중앙일보</span></div></details><details class="kw"><summary><b>셰프</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOc3dod1U0dWZKdkxweV81X1J2dG90bnZFMURudGVXNWdBOE5Rd0dBMFpQWTNtMjNSWWhjX195WVJxOHhIOEFjRlQ5ZnZ1UDVocVc4bldpZ3d6ZGtFdUhkdTg1UVYzN1ZGaFpsdENjLXNFaTBPNDNha19PWW4wOEVRdjJsRy1Sb3BfLVY5QzR3?oc=5" target="_blank" rel="noopener noreferrer">미국인 셰프가 샌드위치를 ​​8만 8천 VND에 팔자 손님들이 줄을 서서 기다린다.</a><span class="meta">vietnam.vn</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBXTUI0QzJHcmVXT1NUWDFjN1JuTTVQMXlCLXhRbnBReGJ6MXQzeEV0ZWJ4Q3hJTWxrX3pma2pmMFJoYUFLNUwzUS1Ea05zSE84a1pNR192M3RrNEZTLXFJUFltdUF4eVU4c3c?oc=5" target="_blank" rel="noopener noreferrer">루아베이커리, 日 사토 셰프와 손잡는다…신제품 협업 추진</a><span class="meta">컨슈머타임스</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE1JaEdxWkYwbkFMOXd0Uk1mWDR3TTB5dDE4M2Q3WWNZbjFSSENsTmR4QUFyb3R4UEk1UGpXaG42Y0pyLTJqcHd3SGRHU2syeGNkb2c?oc=5" target="_blank" rel="noopener noreferrer">우장산브런치카페 스윗온유, 작은 정원에 머무는 듯한 여유와 셰프의 브런치를 만나다</a><span class="meta">youthassembly.kr</span></div></details><details class="kw"><summary><b>신메뉴</b> <i>3건 · 출처 3</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBqR0FzQmNDVG02TjdNdkdONXlHRWw4ZVVJMFBabU1pWVpLT1FVWlRyM0JaR19rRjJlNjRmTGdqYll0ZldWSHY1SE1fUFpnVThsajhJX3ZOTjhod29GWUVwT21Ycjh5VmE1cHdlMlRidXY?oc=5" target="_blank" rel="noopener noreferrer">퀴즈노스, 가을 신메뉴 &#x27;숯불치킨&#x27; 샌드위치 출시</a><span class="meta">shinailbo.co.kr</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lSmhMY25vTlZYT2N0aXdWQUJ5OUNCRzRhMThzZzdFajFxdHRiYmtneEVUYzRkZGotejBhRERydDBMeW04eW5wZldUcC1SZ09HbmlSRVhfZWNOMmNPQTlB0gFkQVVfeXFMTWFvSmxmRnVHaFgtb1JDeW5UOWZaVDZ4eUVPbXU4NFF5MnV5ZnlVSzZQSnZkdDFtSlVmaDJ0TXNjajRNSFJKdmNGZzA0VzIwMVRUYTE2aXhVRjlNcXJsc2diY2Vrcg?oc=5" target="_blank" rel="noopener noreferrer">&quot;카페에서 맛보세요&quot;…보은군 향토 음식 신메뉴 &#x27;대추곰&#x27; 판매</a><span class="meta">뉴스1</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5reHh1ZXFCelQwZkNxYWRhdkUtN3NjY1M2SlR6clhDT1FRaFA2UDFrSTB2bXFTUXlUa2VjR2Q1QllDV1hxbE9yaWltWjNMZk8tRWpQVS1oaFN6R1dDU1phatIBeEFVX3lxTE91N1RGWExlMWVDNzZnRFNlbHkzcl9pVlZ2cnJpcDkzclFOdk41WFNHOW42RFhCdGRsRXAxeDdRSkllMF9GZzNub0xHQ0N1bEYxakFSVHlVUFhCS1R0dlZEcW0tSklFaXlzSXBoV050cnUzVENnZkIwMg?oc=5" target="_blank" rel="noopener noreferrer">&quot;알록달록 가을이 왔다&quot; 카페업계, 신메뉴에 계절감 입힌다</a><span class="meta">뉴시스</span></div></details><details class="kw"><summary><b>location</b> <i>2건 · 출처 2</i></summary><div class="ev"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxONm5uMUJaWGl0U25SQ1ZFNXZWR3VLT0Y3RjJDdWY2cVpHelMweUI5ZnB1aU5hVTh4UjJzcUNPZWNCODZxRFRaYy03N0pxRXJHeUVMOTFTb25lX0pybFlmQmdhUl9pWXdPV0NZUEpTZmJKM2txdW9WY21mS1pUZDVlVTdoYUdpUmFlS2ZoWGNfLWpuZ1NOczNGSFh1MmpVQzdG?oc=5" target="_blank" rel="noopener noreferrer">Popular sandwich chain with toasty subs opens first location in major market</a><span class="meta">Yahoo Finance</span></div><div class="ev"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQa1hsczhhQmtVWm1Bc3BuelhPa2h4RExFRDJIMzNBalRaSUJvN3dVeWNQcEZiZ2ZvbUNWWFNZaFkxYVhMYUc1VHY4ZGRCSkFxWUgtbjRlazZwNlRnVUFSNWRWdDN5YzM4VzA3VERYTHJtSVVsMVBjQVczUGtVdmJRa1UtMUJBSUh3UXktNmlZN1Rrd2xpNTQ4M1Qyazh4VEJzd0gwUTVqa0ZIN1JwS2N1bw?oc=5" target="_blank" rel="noopener noreferrer">Local coffee chain opens second location as national chains expand in Albuquerque</a><span class="meta">The Business Journals</span></div></details></div>
+
+  <h3 class="sec">실행 아이디어 <span class="meta">0건</span></h3>
+  <div class="grid"><p class="dim">이 주차에 공유된 아이디어가 없습니다.</p></div>
+
+  <h3 class="sec">관심 브랜드 검토 현황 <span class="meta">0 / 0</span></h3>
+  <div class="card"><p class="dim">등록된 관심 브랜드가 없습니다.</p></div>
+
+  
+
+  <h3 class="sec">트렌드 자료 <span class="meta">27건</span></h3>
+  <div class="grid"><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOVmV4c3o2Rkk1UXJpaml2VWpRUXZqaVJoUWVfOXVlel9QUS13THdwNjVZdk9JUG5BQlhjTVVaOTJqaXd5SF9vX3JNSXZoNHpnZGFKQWx4dzM1VEFFR2lfZmt5OFgtMnRpalkwOExPTEZLdDJxSjBCNG0wbkxmOGtMXzNJR1Nzd9IBmgFBVV95cUxNLUFrQnFVb2NPNE5UWjIwT01DOV96cEo5b3pEc2xaT2IzRnQxYnBkYlFJWGdxOGNZckNYY2kyZTE0akZ2cEZ4VVVfdWRMcThMQWQtSFNfNmlvd0ljZjlaQ05FREhTbFNxc2I2T2kxZERmenV2cFo5TWltX19VTUltYW9aeUZKX1hXR0I3VXl1V0J4eExCREx0TTJ3?oc=5" target="_blank" rel="noopener noreferrer">[Why] 브런치 열풍 이끈 ‘리코타 샐러드’… 그 많던 매장은 어디로 - 조선비즈</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Chosunbiz <span class="dot">·</span> <span class="mono">게시 2026.09.13</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE5fdUlUeEtaZzJQTkdaazBVRlFXQVhPY2VSN3EzMGpFWjRVenQtUndES1RiclJaN1lpZ2JCNjZPNlhIekdMdkE?oc=5" target="_blank" rel="noopener noreferrer">밤·홍시·흑임자 다 모였다…카페업계 가을 메뉴 ‘제철 전쟁’</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">v.daum.net <span class="dot">·</span> <span class="mono">게시 2026.09.13</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFB2MDNrN3JrNGxvOGZMMmt4cjV1RjAxRlJETW5IcWxseThMUGluMi16d2dPTGRMS2JaWlIwTTJweWc1SE41NTBQWDh6UU56bmZWd213UnlqMHBFUlVNdkVWNnpqaXFNdkFzcGfSAW9BVV95cUxPd2lhMXIxLUxiQzAtYmU4UGJNNG52N1pJZm14UmpudHF3Y2oyZWJjYkpqOU83UWJrVzhIR0ZaeFFOYVhkVWVYTDNRb2RWYlN2eEtPUGZ5VG5vUjY3a3ZuaU9USVJiRWFuam1EdFJmTG8?oc=5" target="_blank" rel="noopener noreferrer">&quot;고구마는 마시고 밤은 떠먹고&quot;…카페 메뉴판에 가을 왔다[핑거푸드]</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">머니투데이 <span class="dot">·</span> <span class="mono">게시 2026.09.13</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9nMFczWDdmRF9FbXdIZ1htRjVVVlJKbGFwbjM3Z2RheFdBaXVUZmI3S3JSbHlQOGlURnlYM05wa0paYWdMOFJZbE5sSW1WVnRsSlNVaEN6VmJwb2VmdG1jWko4TTJ1MGxLMkc4eFJrMHZ6RDNZMnU2bVg3OGl3M0U?oc=5" target="_blank" rel="noopener noreferrer">7 Things You Need To Know About Canadian Sandwich Chain Mr. Sub</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Tasting Table <span class="dot">·</span> <span class="mono">게시 2026.09.12</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOc3dod1U0dWZKdkxweV81X1J2dG90bnZFMURudGVXNWdBOE5Rd0dBMFpQWTNtMjNSWWhjX195WVJxOHhIOEFjRlQ5ZnZ1UDVocVc4bldpZ3d6ZGtFdUhkdTg1UVYzN1ZGaFpsdENjLXNFaTBPNDNha19PWW4wOEVRdjJsRy1Sb3BfLVY5QzR3?oc=5" target="_blank" rel="noopener noreferrer">미국인 셰프가 샌드위치를 ​​8만 8천 VND에 팔자 손님들이 줄을 서서 기다린다.</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">vietnam.vn <span class="dot">·</span> <span class="mono">게시 2026.09.12</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE1XcWt2bm5FY3JCRXZ2ZkgtSDNCM19uOWtnd3M1dGc0ellpUGVoV0UzT052S1JoczNVMjE1WjlzamRSOGs0aHUxanlGQXNDVEk5X09HcGx2aUNwSkdxSGlEMnM0dkpSblBn?oc=5" target="_blank" rel="noopener noreferrer">[할랄기획1] 파리바게트, 교촌치킨...말레이시아 ‘할랄 한류’ 공략 비결은?</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">아세안익스프레스 <span class="dot">·</span> <span class="mono">게시 2026.09.11</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTFBpLVltaU9Wa2RqZkRyTUpxTjVob1lSTjQ4S0x6Z01lZEZsOUFjU0pPQ3AxVDNkN1hEV1BjNTRMZ1BqTTFzcXB5N01zdk5KdV84UXBpTXVxTVRKNkRMSnBFckQwV0Ztb180UlMxdXdVS0FVM2RWUXfSAWZBVV95cUxNQk5kbEVNcWFfcVJzSU5wZnllelRtVEE2WjRpeThUUExnOG1Cb050SThKSWJVdHM2WlBZeUJTbXM3WVJORnZjYXRPU0FfZ01aT3JKUG9HbTJTeGJqMHBoeUQxeHRjdUE?oc=5" target="_blank" rel="noopener noreferrer">파리바게뜨, 맞춤형 케이터링 시장 출사표…‘샌드위치 도시락’ 선보여</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">동아일보 <span class="dot">·</span> <span class="mono">게시 2026.09.11</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE1hWnpCREl1MWxoX0NRLUhvVEpreGtWc1NtSU1mdDY4S1AyYWhaOTdpeWZOdzBUM0VHcHdodGktWEdSeG1vMzFzU0dFejFvSHU3X1p0ZkNwMDFnQUxoejFvZEhtcFo?oc=5" target="_blank" rel="noopener noreferrer">“샌드위치·디저트를 한 상자에”…파리바게뜨, 케이터링 박스 선봬</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">서울경제TV <span class="dot">·</span> <span class="mono">게시 2026.09.11</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE1qR045dDVTWXNESEdRTVBUQVpncmdFUHV2RzhCc3JtRTBvTDZjZG56V0o0eHVBRHY3MzlpOGpycmx5QU94azNhR01kWE9BREwzQTdadGUyMTFsV1RBVWlpX3Voa3ZEVU1ydjdqZA?oc=5" target="_blank" rel="noopener noreferrer">이용우 부여군수, 박수현 도지사와 &#x27;샌드위치&#x27; 조찬 간담회</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">충청뉴스 <span class="dot">·</span> <span class="mono">게시 2026.09.11</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxQd0xqZHZTV1JMSXhCR0Vvam10dWs3UFNHeWN1TWxldWpaZktZd0NkTEhpREdqRTh3WHNJbFJqbEZ3TlpqYkJWbjZ5X3E5WmdyaElZMmZTSHZsbS1WUksza19sZHE5VjFSZ1M5RkNPdlN3Tkx0ZXpyNUJzNVBuQkdUTDE1TmxKQmZXNk40MVFXVlV3NEsxNmx2SmtMcHJUY1RaLVpZZVFLdVlhM00xRXhzMjNzNHQ0akJw?oc=5" target="_blank" rel="noopener noreferrer">Tulane announces new popular Uptown sandwich shop vendor at Yulman Stadium</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">The Tulane Hullabaloo <span class="dot">·</span> <span class="mono">게시 2026.09.10</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBqR0FzQmNDVG02TjdNdkdONXlHRWw4ZVVJMFBabU1pWVpLT1FVWlRyM0JaR19rRjJlNjRmTGdqYll0ZldWSHY1SE1fUFpnVThsajhJX3ZOTjhod29GWUVwT21Ycjh5VmE1cHdlMlRidXY?oc=5" target="_blank" rel="noopener noreferrer">퀴즈노스, 가을 신메뉴 &#x27;숯불치킨&#x27; 샌드위치 출시</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">shinailbo.co.kr <span class="dot">·</span> <span class="mono">게시 2026.09.10</span></div>
+  <div class="dim sm">같은 소식 1건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBXTUI0QzJHcmVXT1NUWDFjN1JuTTVQMXlCLXhRbnBReGJ6MXQzeEV0ZWJ4Q3hJTWxrX3pma2pmMFJoYUFLNUwzUS1Ea05zSE84a1pNR192M3RrNEZTLXFJUFltdUF4eVU4c3c?oc=5" target="_blank" rel="noopener noreferrer">루아베이커리, 日 사토 셰프와 손잡는다…신제품 협업 추진</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">컨슈머타임스 <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="http://www.foodbank.co.kr/news/articleView.html?idxno=68479" target="_blank" rel="noopener noreferrer">생식빵의 승부처는 재구매다</a></h3>
+  <p>월간식당 9월호 ‘트렌드리포트’의 주제는 프리미엄 생식빵에 대한 기사다. 취재를 시작하기 전까지 생식빵은 한때 유행했던 고급 식빵의 귀환쯤으로 생각했다. 그러나 프리미엄 생식빵을 취급하는 브랜드들을 차례로 취재하다 보니 생각이 달라졌다. 생식빵은 더 이상 줄을 서서 구매하고 사진을 남기</p>
+  <div class="meta">식품외식경제 <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE1UMzVTdTVfai14Nk9qeGdIcEJYNFFwN3hWcHlMUFlKVFJhTzJWbU5lMVUwdW1SclVqNEZuVmI3ZzV1d09YWklwaVNwYVBwQ1A2UHRoSEFORlhrUQ?oc=5" target="_blank" rel="noopener noreferrer">추석 연휴 &#x27;드라이브&#x27; 가기 좋은 서울 근교 카페 5</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">esquirekorea.co.kr <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxONm5uMUJaWGl0U25SQ1ZFNXZWR3VLT0Y3RjJDdWY2cVpHelMweUI5ZnB1aU5hVTh4UjJzcUNPZWNCODZxRFRaYy03N0pxRXJHeUVMOTFTb25lX0pybFlmQmdhUl9pWXdPV0NZUEpTZmJKM2txdW9WY21mS1pUZDVlVTdoYUdpUmFlS2ZoWGNfLWpuZ1NOczNGSFh1MmpVQzdG?oc=5" target="_blank" rel="noopener noreferrer">Popular sandwich chain with toasty subs opens first location in major market</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Yahoo Finance <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE5qOTRGcllkeUNwSXJKMGdoMUlvUlNtWS1UbmZkY0hxZm12cXM5b3lnUmNoMTExcW4yZTJKYm5CN2JFX09ub3ZmX2E3Y0VuTFg0alZJZE5KeU5TZXNJ?oc=5" target="_blank" rel="noopener noreferrer">According to locals, Joe Leone&#x27;s Centro is where you go for the best sandwich at the shore</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">92.7 WOBM <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lSmhMY25vTlZYT2N0aXdWQUJ5OUNCRzRhMThzZzdFajFxdHRiYmtneEVUYzRkZGotejBhRERydDBMeW04eW5wZldUcC1SZ09HbmlSRVhfZWNOMmNPQTlB0gFkQVVfeXFMTWFvSmxmRnVHaFgtb1JDeW5UOWZaVDZ4eUVPbXU4NFF5MnV5ZnlVSzZQSnZkdDFtSlVmaDJ0TXNjajRNSFJKdmNGZzA0VzIwMVRUYTE2aXhVRjlNcXJsc2diY2Vrcg?oc=5" target="_blank" rel="noopener noreferrer">&quot;카페에서 맛보세요&quot;…보은군 향토 음식 신메뉴 &#x27;대추곰&#x27; 판매</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">뉴스1 <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE1JaEdxWkYwbkFMOXd0Uk1mWDR3TTB5dDE4M2Q3WWNZbjFSSENsTmR4QUFyb3R4UEk1UGpXaG42Y0pyLTJqcHd3SGRHU2syeGNkb2c?oc=5" target="_blank" rel="noopener noreferrer">우장산브런치카페 스윗온유, 작은 정원에 머무는 듯한 여유와 셰프의 브런치를 만나다</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">youthassembly.kr <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTFBqYVk2WlR6VkJGRmtMbWFmSDJzWVZNb2YwdzZ4cFRfTWdnQ1lwejc0QTFGaXAwWXFUYTRFOGFxbDdYTTZWZDh4UWhEc18teTRUWWlPdmxwSWItc1pzcElYemhER0NVUFJYVnRjdERR?oc=5" target="_blank" rel="noopener noreferrer">투썸플레이스, 삼양식품 ‘불닭’ 협업 메뉴 인기… 베이커리 신제품 ‘피자빵’ 출시</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">economytimes.kr <span class="dot">·</span> <span class="mono">게시 2026.09.09</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5sR1pkOVdDZ09pU0E0RnRIOGVwMkRVRWQ1Mm5JMWhaM2k1RVdHOFRPNTZOWGZWc1hSSTlZT0tmRmU4c0RkQjBGVzBwT3pVUzFkLVE?oc=5" target="_blank" rel="noopener noreferrer">켈리토스트카페, ‘토스트+카페+디저트’ 운영 모델로 신규 창업자 공략</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">youthassembly.kr <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTFB6aUNjdXVqYXdZVnVZdnM4Nm9EdnBRakw3ZjZsb0hTRzF5bDVicEwwZ3U2ZFJVRWc1dUJqd0xJQWdRa05SaThBOG5nM1h0RkhUMFRGNDUzSXFDMUo3OUtqWEJGNDJkcmluSVMtbjZnZzFxei1qNC1aeE9yTnNBVU0?oc=5" target="_blank" rel="noopener noreferrer">햄치즈부터 참치마요까지… 영양사 꼽은 ‘가장 건강한’ 샌드위치는?</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">헬스조선 <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE5PT1BydHVMQTBHR2ozVWpkenNQWGNkbXJzYnM1MHFCTmMweTdpbElDLXR6QVY0ZFBuaFBzTGdWRktnMXI0enFVM0dnQVNadFVmeUJSNlBweUFKVEJ6bFVNR2p3?oc=5" target="_blank" rel="noopener noreferrer">커피를 화분에 담아준다고? 멜로즈 신상 브런치 카페 [영상]</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">미주중앙일보 <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">브랜드·매장</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQa1hsczhhQmtVWm1Bc3BuelhPa2h4RExFRDJIMzNBalRaSUJvN3dVeWNQcEZiZ2ZvbUNWWFNZaFkxYVhMYUc1VHY4ZGRCSkFxWUgtbjRlazZwNlRnVUFSNWRWdDN5YzM4VzA3VERYTHJtSVVsMVBjQVczUGtVdmJRa1UtMUJBSUh3UXktNmlZN1Rrd2xpNTQ4M1Qyazh4VEJzd0gwUTVqa0ZIN1JwS2N1bw?oc=5" target="_blank" rel="noopener noreferrer">Local coffee chain opens second location as national chains expand in Albuquerque</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">The Business Journals <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE1FYmppOTVnYnhUSGpHTW05dGtyMGhVVG9DeTFyX0dDblFCMGdwSTVPV3A4SHBFQTVVbTgtQW5faGczWkFNN0ZEWExIRm9XUXBTMnpYUXFXRFpqSDN0WEkzQjJjTzl4cGJ4X1RUSGM3MlQ?oc=5" target="_blank" rel="noopener noreferrer">Dän Bakery + Cafe Opens in Hoboken</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">Hoboken Girl <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  <div class="dim sm">같은 소식 4건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">해외</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPSXpaTjZucTBLU1F1UUZNT0I1WGt5eVdYR25QWExhNVhJbkFYVGhDR3AyQXdYWUJUWGNfcndjTU0zRU5iUFQzemdVUzdacG51QVR3ZUR2aGJNeDFvUy0tNEE1OUVJTHl1dGNQZVdHUlJuRk5rN3VCN3djcGE0TS0zNDE4Vzc1eHgtWnJ1aF9nVE8xWEFWVXM4ak9EZmw?oc=5" target="_blank" rel="noopener noreferrer">A 13-year-old and his grandpa run this sandwich shop together</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">KFYR-TV <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  <div class="dim sm">같은 소식 3건 더</div>
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE9UMTFfdzFKTkVCTE9RZUItbURSMGh1cDE2ZFFxWElrcVBULUhVQmRLNTkweFBrdHQ3SWdXNDV5T0dFcXIyQ0E?oc=5" target="_blank" rel="noopener noreferrer">3년의 여름, 뉴욕에서 파스트라미 샌드위치를 도장 깨며</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">브런치 <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  
+</article><article class="item">
+  <div class="chips"><span class="chip g">메뉴·재료</span><span class="chip line">국내</span></div>
+  <h3><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5reHh1ZXFCelQwZkNxYWRhdkUtN3NjY1M2SlR6clhDT1FRaFA2UDFrSTB2bXFTUXlUa2VjR2Q1QllDV1hxbE9yaWltWjNMZk8tRWpQVS1oaFN6R1dDU1phatIBeEFVX3lxTE91N1RGWExlMWVDNzZnRFNlbHkzcl9pVlZ2cnJpcDkzclFOdk41WFNHOW42RFhCdGRsRXAxeDdRSkllMF9GZzNub0xHQ0N1bEYxakFSVHlVUFhCS1R0dlZEcW0tSklFaXlzSXBoV050cnUzVENnZkIwMg?oc=5" target="_blank" rel="noopener noreferrer">&quot;알록달록 가을이 왔다&quot; 카페업계, 신메뉴에 계절감 입힌다</a></h3>
+  <p class="dim">요약 없음 — 원문에서 확인</p>
+  <div class="meta">뉴시스 <span class="dot">·</span> <span class="mono">게시 2026.09.08</span></div>
+  
+</article></div>
+</section>
+
+
+<footer>
+  샌드위치 위클리 공유본 · 2026.09.21 17:18 생성 · 주차 3개<br>
+  숫자는 수집된 자료를 그대로 센 것입니다. 확보하지 못한 값(매출·저장 수 등)은 넣지 않았습니다.
+</footer>
+</div>
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('.week'));
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.tabs button'));
+  function show(w){
+    secs.forEach(function(s){ s.hidden = s.dataset.week !== w; });
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.week === w)); });
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.week); }); });
+  if (secs.length) show(secs[0].dataset.week);
+})();
+</script>
+</body>
+</html>
